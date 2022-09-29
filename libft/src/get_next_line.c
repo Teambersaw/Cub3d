@@ -1,85 +1,117 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 11:59:33 by jrossett          #+#    #+#             */
+/*   Updated: 2022/09/29 12:18:40 by jrossett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "libft.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-char	*ft_matrix(char	*str, char	*line)
+int	line_len(char *str, int start)
 {
-	char	*mew;
-	int		len_str;
-	int		len_line;
+	int	i;
 
-	len_str = ft_strlen(str);
-	len_line = ft_strlen(line);
-	mew = malloc(sizeof(char) * (len_str - len_line + 1));
-	if (!mew)
-		return (NULL);
-	ft_memcpy(mew, str + len_line, len_str - len_line + 1);
-	free(str);
-	return (mew);
-}
-
-char	*ft_free(char *str, char *tmp)
-{
-	free(str);
-	free(tmp);
-	return (NULL);
-}
-
-char	*ft_parse(char *str)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	while (str[i] != '\n' && str[i])
+	i = start;
+	if (!str)
+		return (0);
+	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 		i++;
-	line = ft_substr(str, 0, i);
-	if (!line)
-		return (NULL);
-	return (line);
+	return (i - start);
 }
 
-char	*ft_memory(int fd, char *str, int buffer)
+int	mem_empty(char *memory)
+{
+	while (*memory)
+		if (*(memory++) != 127)
+			return (0);
+	return (1);
+}
+
+char	*get_memory(int fd, int *bytes, char *memory)
 {
 	char	*tmp;
-	int		byte;
 
-	byte = 1;
-	tmp = malloc(sizeof(char) * (buffer + 1));
+	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!tmp)
 		return (NULL);
 	*tmp = '\0';
-	while (ft_strchr(tmp, '\n') == NULL && byte != 0)
+	while (!ft_strchr(tmp, '\n') && *bytes)
 	{
-		byte = read(fd, tmp, buffer);
-		if (byte < 0)
+		*bytes = read(fd, tmp, BUFFER_SIZE);
+		if (*bytes < 0)
 		{
 			free(tmp);
+			free(memory);
 			return (NULL);
 		}
-		tmp[byte] = '\0';
-		str = ft_strjoin_gnl(str, tmp);
+		if (!*bytes && !*tmp)
+			break ;
+		tmp[*bytes] = '\0';
+		memory = ft_strjoin(memory, tmp);
 	}
-	if (!byte && !*str)
-		return (ft_free(str, tmp));
 	free(tmp);
-	return (str);
+	return (memory);
 }
 
-char	*get_next_line(int fd, int buffer)
+char	*fill_line(char *memory)
 {
-	char		*line;
-	static char	*str;
+	int		i;
+	int		j;
+	char	*line;
 
-	if (buffer <= 0 || fd < 0)
+	i = 0;
+	while (memory && memory[i] == 127)
+		i++;
+	line = malloc(sizeof(char) * (line_len(memory, i) + 1));
+	if (!line)
 		return (NULL);
-	str = ft_memory(fd, str, buffer);
-	if (!str)
+	j = 0;
+	while (memory[i] && memory[i] != '\n')
+	{
+		line[j++] = memory[i];
+		memory[i++] = 127;
+	}
+	if (memory[i] == '\n')
+	{
+		line[j++] = '\n';
+		memory[i++] = 127;
+	}
+	line[j] = '\0';
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	int			bytes;
+	char		*line;
+	static char	*memory;
+
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	line = ft_parse(str);
-	str = ft_matrix(str, line);
+	bytes = 1;
+	memory = get_memory(fd, &bytes, memory);
+	if (!memory)
+		return (NULL);
+	else if (!bytes && !*memory)
+	{
+		free(memory);
+		return (NULL);
+	}
+	line = fill_line(memory);
+	if (mem_empty(memory))
+	{
+		free(memory);
+		memory = NULL;
+	}
 	return (line);
 }

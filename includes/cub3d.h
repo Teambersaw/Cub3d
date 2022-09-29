@@ -17,8 +17,23 @@ typedef struct   s_elem
     char    *EA;
     char    **F;
     char    **C;
+    int     index;
+    int     FR;
+    int     FG;
+    int     FB;
+    int     CR;
+    int     CG;
+    int     CB;
 }  t_elem;
 
-int    ft_parsing(int fd);
+void	    ft_free_tab(char **tab);
+int         ft_verif_elem(t_elem *elem);
+void        ft_free_elem(t_elem elem);
+
+void        ft_perror(char *str, int fd, char *line);
+
+int         ft_parsing(int fd, t_elem *elem);
+
+t_elem      ft_init_elem();
 
 #endif
