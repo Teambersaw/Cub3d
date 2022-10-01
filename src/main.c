@@ -29,27 +29,6 @@ int ft_verif_name(char *name)
     return (i);
 }
 
-void    print_tab(char **tab, char *car) //fonction test
-{
-    int i;
-
-    i = -1;
-    if (!tab)
-        return ;
-    while (tab[++i])
-        printf("%s valeur: %s\n", car, tab[i]);
-}
-
-void    print_elem(t_elem elem) //fonction test
-{
-    printf("east valeur: %s\n", elem.EA);
-    printf("north valeur: %s\n", elem.NO);
-    printf("south valeur: %s\n", elem.SO);
-    printf("west valeur: %s\n", elem.WE);
-    print_tab(elem.C, "Plafond");
-    print_tab(elem.F, "sol");                
-}
-
 int main(int ac, char **av)
 {
     t_elem  elem;
@@ -61,11 +40,9 @@ int main(int ac, char **av)
     elem = ft_init_elem();
     if (ft_parsing(fd, &elem))
     {
-        print_elem(elem); //test
         ft_free_elem(elem);
         ft_perror("Invalid map.", fd, NULL);
     }
-    print_elem(elem); //test
     ft_free_elem(elem);
     close(fd);
     return (0);

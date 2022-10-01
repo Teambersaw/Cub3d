@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 12:18:58 by hubretec          #+#    #+#             */
-/*   Updated: 2022/09/29 19:21:41 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/09/30 14:43:00 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			ft_max(int n, int m);
 int			ft_putstr(char *str);
 int			ft_lstsize(t_list *lst);
 int			ft_atoi(const char *nptr);
-int			ft_atoi_2(const char *nptr);
 int			ft_putchar_fd(char c, int fd);
 int			ft_printf(const char *s, ...);
 int			count_words(char const *s, char c);
@@ -76,7 +75,7 @@ void		ft_putnbr_base_u(unsigned int nb, char *base, int *len);
 void		ft_lstreplace_index(t_list *stack, t_list *new, int index);
 
 char		*ft_itoa(int n);
-char		*ft_strdup(char *src, char c);
+char		*ft_strdup(char *src);
 char		*get_next_line(int fd);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);

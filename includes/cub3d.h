@@ -17,23 +17,35 @@ typedef struct   s_elem
     char    *EA;
     char    **F;
     char    **C;
-    int     index;
+    int     nb_elem;
     int     FR;
     int     FG;
     int     FB;
     int     CR;
     int     CG;
     int     CB;
-}  t_elem;
+}   t_elem;
 
-void	    ft_free_tab(char **tab);
+typedef struct  s_map
+{
+    char    **map;
+    int     x;
+    int     y;
+    char    player;
+    int     nb_player;
+}   t_map;
+
+int	        ft_atoi_2(const char *nptr);
 int         ft_verif_elem(t_elem *elem);
+int         ft_parsing(int fd, t_elem *elem);
+int         ft_atoi_3(const char *nptr, int nb, int minus);
+char        **ft_parse_map(int fd, t_map *map);
+char        *ft_strdup_2(char *src, char c);
+void	    ft_free_tab(char **tab);
 void        ft_free_elem(t_elem elem);
-
 void        ft_perror(char *str, int fd, char *line);
 
-int         ft_parsing(int fd, t_elem *elem);
-
 t_elem      ft_init_elem();
+t_map       ft_init_map();
 
 #endif

@@ -1,5 +1,64 @@
 #include "cub3d.h"
 
+char	*ft_strdup_2(char *src, char c)
+{
+	int		i;
+	char	*string;
+
+	i = 0;
+    if (!src)
+        return (NULL);
+    if (!c)
+		c = '\0';
+	while(src[i] && src[i] != c)
+		i++;
+	string = malloc(sizeof(char) * (i + 1));
+	if (!string)
+		return (0);
+	i = -1;
+	while (src[++i] != c)
+		string[i] = src[i];
+	string[i] = '\0';
+	return (string);
+}
+
+int ft_atoi_3(const char *nptr, int nb, int minus)
+{
+	if (*nptr < '0' && *nptr > '9')
+		return (-1);
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		nb = nb * 10 + (*(nptr++) - '0');
+		if (nb > 999)
+			return (-1);
+	}
+	while (*nptr)
+	{
+		if (*nptr != ' ')
+			return (-1);
+		nptr++;
+	}
+	return (nb * minus);
+}
+
+int	ft_atoi_2(const char *nptr)
+{
+	int	nb;
+	int	minus;
+
+	nb = 0;
+	minus = 1;
+	while (*nptr == 32)
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			minus = -1;
+		nptr++;
+	}
+	return (ft_atoi_3(nptr, nb, minus));
+}
+
 void	ft_free_tab(char **tab)
 {
     int	i;
@@ -58,6 +117,18 @@ int ft_verif_elem(t_elem *elem)
     return (0);
 }
 
+t_map   ft_init_map()
+{
+    t_map   map;
+
+    map.map = NULL;
+    map.x = 0;
+    map.y = 0;
+    map.player = 0;
+    map.nb_player = 0;
+    return (map);
+}
+
 t_elem   ft_init_elem()
 {
     t_elem  elem;
@@ -68,7 +139,7 @@ t_elem   ft_init_elem()
     elem.EA = NULL;
     elem.F = NULL;
     elem.C = NULL;
-    elem.index = 0;
+    elem.nb_elem = 0;
     elem.FR = 0; 
     elem.FG = 0;
     elem.FB = 0;

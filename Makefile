@@ -6,7 +6,7 @@ CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES)
 NAME=cub3d
 HEADER= includes/cub3d.h includes/libft.h
 
-CFILES=$(addprefix $(SRC_DIR), main.c parsing.c init_struct.c)
+CFILES=$(addprefix $(SRC_DIR), main.c parsing.c init_struct.c parsing_map.c)
 
 OBJS=$(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(CFILES))
 
