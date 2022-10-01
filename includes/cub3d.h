@@ -33,25 +33,27 @@ typedef struct  s_map
     int     y;
     char    player;
     int     nb_player;
+    int     value;
+    t_elem  elem;
 }   t_map;
 
 // -----------------------------PARSING-----------------------------
 
 int         ft_mid_map(t_map *map);
-int         ft_verif_name(char *name);
 int	        ft_atoi_2(const char *nptr);
 int         ft_verif_elem(t_elem *elem);
-int         ft_parsing(int fd, t_elem *elem);
+int         ft_verif_name(int ac, char **av);
 int         ft_parse_elem(int fd, t_elem *elem);
 
-char        **ft_parse_map(int fd, t_map *map);
 char        *ft_strdup_2(char *src, char c);
+char        **ft_parse_map(int fd, t_map *map);
 
+void        ft_free_map(t_map map);
 void	    ft_free_tab(char **tab);
-void        ft_free_elem(t_elem elem);
-void        ft_perror(char *str, int fd, char *line);
+void        ft_perror(char *str, int fd, char *line, t_map *map);
 
-t_elem      ft_init_elem();
 t_map       ft_init_map();
+t_elem      ft_init_elem();
+t_map       ft_parsing(int ac, char **av);
 
 #endif

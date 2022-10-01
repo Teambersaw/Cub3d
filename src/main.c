@@ -2,19 +2,11 @@
 
 int main(int ac, char **av)
 {
-    t_elem  elem;
-    int     fd;
+    t_map   map;
 
-    if (ac != 2)
-        ft_perror("The program take only one argument.", 0, NULL);
-    fd = ft_verif_name(av[1]);
-    elem = ft_init_elem();
-    if (ft_parsing(fd, &elem))
-    {
-        ft_free_elem(elem);
-        ft_perror("Invalid map.", fd, NULL);
-    }
-    ft_free_elem(elem);
-    close(fd);
+    map = ft_parsing(ac, av);
+    if (map.value == 0)
+        ft_perror("invalid map", -1, NULL, &map);        
+    ft_free_map(map);
     return (0);
 }

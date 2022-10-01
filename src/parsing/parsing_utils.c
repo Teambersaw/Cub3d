@@ -1,13 +1,21 @@
 #include "cub3d.h"
 
-void    ft_free_elem(t_elem elem)
+void    ft_free_map(t_map map)
 {
-    free(elem.SO);
-    free(elem.NO);
-    free(elem.WE);
-    free(elem.EA);
-    ft_free_tab(elem.F);
-    ft_free_tab(elem.C);
+	if (map.elem.SO)
+    	free(map.elem.SO);
+	if (map.elem.NO)
+    	free(map.elem.NO);
+	if (map.elem.WE)
+    	free(map.elem.WE);
+	if (map.elem.EA)
+    	free(map.elem.EA);
+	if (map.elem.F)
+    	ft_free_tab(map.elem.F);
+	if (map.elem.C)
+    	ft_free_tab(map.elem.C);
+	if (map.map)
+		ft_free_tab(map.map);
 }
 
 void	ft_free_tab(char **tab)

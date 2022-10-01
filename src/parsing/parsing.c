@@ -41,18 +41,21 @@ int ft_verif_map(t_map *map)
     return (0);
 }
 
-int ft_parsing(int fd, t_elem *elem)
+t_map ft_parsing(int ac, char **av)
 {
+    int     fd;
     t_map   map;
 
-    if (ft_parse_elem(fd, elem) || ft_verif_elem(elem))
-        return (1);
-    map = ft_init_map();    
+    fd = ft_verif_name(ac, av);
+    map = ft_init_map();
+    if (ft_parse_elem(fd, &map.elem) || ft_verif_elem(&map.elem))
+        return (close(fd), map);
     map.map = ft_parse_map(fd, &map);
     if (!map.map)
-        return (1);
+        return (close(fd), map);
     if (ft_verif_map(&map))
-        return (ft_free_tab(map.map), 1);
-    ft_free_tab(map.map);
-    return (0);
+        return (close(fd), map);
+    map.value = 1;
+    close(fd);
+    return (map);
 }

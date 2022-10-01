@@ -47,6 +47,8 @@ t_map   ft_init_map()
     map.y = 0;
     map.player = 0;
     map.nb_player = 0;
+    map.elem = ft_init_elem();
+    map.value = 0;
     return (map);
 }
 
