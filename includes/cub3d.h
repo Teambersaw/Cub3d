@@ -35,12 +35,18 @@ typedef struct  s_map
     int     nb_player;
 }   t_map;
 
+// -----------------------------PARSING-----------------------------
+
+int         ft_mid_map(t_map *map);
+int         ft_verif_name(char *name);
 int	        ft_atoi_2(const char *nptr);
 int         ft_verif_elem(t_elem *elem);
 int         ft_parsing(int fd, t_elem *elem);
-int         ft_atoi_3(const char *nptr, int nb, int minus);
+int         ft_parse_elem(int fd, t_elem *elem);
+
 char        **ft_parse_map(int fd, t_map *map);
 char        *ft_strdup_2(char *src, char c);
+
 void	    ft_free_tab(char **tab);
 void        ft_free_elem(t_elem elem);
 void        ft_perror(char *str, int fd, char *line);
