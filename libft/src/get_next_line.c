@@ -6,10 +6,9 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:59:33 by jrossett          #+#    #+#             */
-/*   Updated: 2022/09/29 12:18:40 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/10/02 12:04:24 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 #include <stdlib.h>

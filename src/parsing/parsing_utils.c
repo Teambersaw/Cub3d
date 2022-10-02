@@ -1,32 +1,32 @@
 #include "cub3d.h"
 
-void    ft_free_map(t_map map)
+void	ft_free_map(t_map map)
 {
 	if (map.elem.SO)
-    	free(map.elem.SO);
+		free(map.elem.SO);
 	if (map.elem.NO)
-    	free(map.elem.NO);
+		free(map.elem.NO);
 	if (map.elem.WE)
-    	free(map.elem.WE);
+		free(map.elem.WE);
 	if (map.elem.EA)
-    	free(map.elem.EA);
+		free(map.elem.EA);
 	if (map.elem.F)
-    	ft_free_tab(map.elem.F);
+		ft_free_tab(map.elem.F);
 	if (map.elem.C)
-    	ft_free_tab(map.elem.C);
+		ft_free_tab(map.elem.C);
 	if (map.map)
 		ft_free_tab(map.map);
 }
 
 void	ft_free_tab(char **tab)
 {
-    int	i;
+	int	i;
 
-    i = -1;
-    while (tab && tab[++i])
-        free(tab[i]);
-    if (tab)
-	    free(tab);
+	i = -1;
+	while (tab && tab[++i])
+		free(tab[i]);
+	if (tab)
+		free(tab);
 }
 
 char	*ft_strdup_2(char *src, char c)
@@ -35,11 +35,11 @@ char	*ft_strdup_2(char *src, char c)
 	char	*string;
 
 	i = 0;
-    if (!src)
-        return (NULL);
-    if (!c)
+	if (!src)
+		return (NULL);
+	if (!c)
 		c = '\0';
-	while(src[i] && src[i] != c)
+	while (src[i] && src[i] != c)
 		i++;
 	string = malloc(sizeof(char) * (i + 1));
 	if (!string)
@@ -51,7 +51,7 @@ char	*ft_strdup_2(char *src, char c)
 	return (string);
 }
 
-int ft_atoi_3(const char *nptr, int nb, int minus)
+int	ft_atoi_3(const char *nptr, int nb, int minus)
 {
 	if (*nptr < '0' && *nptr > '9')
 		return (-1);

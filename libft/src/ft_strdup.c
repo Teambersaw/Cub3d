@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:14:20 by hubretec          #+#    #+#             */
-/*   Updated: 2022/09/30 14:42:48 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/10/02 12:04:06 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ char	*ft_strdup(char *src)
 	string[i] = '\0';
 	return (string);
 }
-

@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 15:08:04 by hubretec          #+#    #+#             */
-/*   Updated: 2022/09/30 14:39:47 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/10/02 12:04:54 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ int	ft_atoi(const char *nptr)
 		nb = nb * 10 + (*(nptr++) - '0');
 	return (nb * minus);
 }
-
