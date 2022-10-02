@@ -35,7 +35,7 @@ char	*ft_verif_join(char *new_j, t_map *map)
 	while (j[++i])
 	{
 		if (j[i] != '\n' && j[i] != 'W' && j[i] != 'E' && j[i] != 'S'
-			&& j[i] != 'N' && j[i] != '0' && j[i] != '1' && j[i] != ' ')
+			&& j[i] != 'N' && j[i] != '0' && j[i] != '1' &&  j[i] != ' ')
 			return (free(j), NULL);
 		if (j[i] == 'S' || j[i] == 'N' || j[i] == 'E' || j[i] == 'W')
 		{

@@ -27,6 +27,7 @@ void	ft_free_tab(char **tab)
 		free(tab[i]);
 	if (tab)
 		free(tab);
+	tab = NULL;
 }
 
 char	*ft_strdup_2(char *src, char c)

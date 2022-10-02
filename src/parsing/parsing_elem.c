@@ -63,9 +63,17 @@ int	ft_elem_cmp(char *line, t_elem *elem)
 	else if (!ft_strncmp(line, "WE", 2))
 		elem->WE = ft_stor(line + 2, elem->WE);
 	else if (!ft_strncmp(line, "F", 1))
+	{
+		if (elem->F)
+			ft_free_tab(elem->F);
 		elem->F = ft_stor_tab(line + 1, elem->F);
+	}
 	else if (!ft_strncmp(line, "C", 1))
+	{
+		if (elem->C)
+			ft_free_tab(elem->C);
 		elem->C = ft_stor_tab(line + 1, elem->C);
+	}
 	else
 		return (1);
 	elem->nb_elem += 1;
