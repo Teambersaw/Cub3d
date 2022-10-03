@@ -55,24 +55,24 @@ char	**ft_stor_tab(char *line, char **tab)
 int	ft_elem_cmp(char *line, t_elem *elem)
 {
 	if (!ft_strncmp(line, "NO", 2))
-		elem->NO = ft_stor(line + 2, elem->NO);
+		elem->no = ft_stor(line + 2, elem->no);
 	else if (!ft_strncmp(line, "EA", 2))
-		elem->EA = ft_stor(line + 2, elem->EA);
+		elem->ea = ft_stor(line + 2, elem->ea);
 	else if (!ft_strncmp(line, "SO", 2))
-		elem->SO = ft_stor(line + 2, elem->SO);
+		elem->so = ft_stor(line + 2, elem->so);
 	else if (!ft_strncmp(line, "WE", 2))
-		elem->WE = ft_stor(line + 2, elem->WE);
+		elem->we = ft_stor(line + 2, elem->we);
 	else if (!ft_strncmp(line, "F", 1))
 	{
-		if (elem->F)
-			ft_free_tab(elem->F);
-		elem->F = ft_stor_tab(line + 1, elem->F);
+		if (elem->f)
+			ft_free_tab(elem->f);
+		elem->f = ft_stor_tab(line + 1, elem->f);
 	}
 	else if (!ft_strncmp(line, "C", 1))
 	{
-		if (elem->C)
-			ft_free_tab(elem->C);
-		elem->C = ft_stor_tab(line + 1, elem->C);
+		if (elem->c)
+			ft_free_tab(elem->c);
+		elem->c = ft_stor_tab(line + 1, elem->c);
 	}
 	else
 		return (1);

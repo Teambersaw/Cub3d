@@ -56,6 +56,11 @@ int	ft_mid_map(t_map *map)
 		{
 			if (ft_open_map(map, x, y))
 				return (1);
+			if (map->map[x][y] == map->player)
+			{
+				map->x = y;
+				map->y = x;
+			}
 			y++;
 		}
 		if (map->map[x][y - 1] == '1')

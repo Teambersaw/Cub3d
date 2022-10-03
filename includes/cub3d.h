@@ -9,24 +9,24 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct   s_elem
+typedef struct s_elem
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	**F;
-	char	**C;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	**f;
+	char	**c;
 	int		nb_elem;
-	int		FR;
-	int		FG;
-	int		FB;
-	int		CR;
-	int		CG;
-	int		CB;
+	int		fr;
+	int		fg;
+	int		fb;
+	int		cr;
+	int		cg;
+	int		cb;
 }	t_elem;
 
-typedef struct  s_map
+typedef struct s_map
 {
 	char	**map;
 	int		x;
@@ -52,8 +52,9 @@ void		ft_free_map(t_map map);
 void		ft_free_tab(char **tab);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
 
-t_map		ft_init_map();
-t_elem		ft_init_elem();
+t_map		ft_init_map(void);
 t_map		ft_parsing(int ac, char **av);
+
+t_elem		ft_init_elem(void);
 
 #endif

@@ -2,18 +2,18 @@
 
 void	ft_free_map(t_map map)
 {
-	if (map.elem.SO)
-		free(map.elem.SO);
-	if (map.elem.NO)
-		free(map.elem.NO);
-	if (map.elem.WE)
-		free(map.elem.WE);
-	if (map.elem.EA)
-		free(map.elem.EA);
-	if (map.elem.F)
-		ft_free_tab(map.elem.F);
-	if (map.elem.C)
-		ft_free_tab(map.elem.C);
+	if (map.elem.so)
+		free(map.elem.so);
+	if (map.elem.no)
+		free(map.elem.no);
+	if (map.elem.we)
+		free(map.elem.we);
+	if (map.elem.ea)
+		free(map.elem.ea);
+	if (map.elem.f)
+		ft_free_tab(map.elem.f);
+	if (map.elem.c)
+		ft_free_tab(map.elem.c);
 	if (map.map)
 		ft_free_tab(map.map);
 }
