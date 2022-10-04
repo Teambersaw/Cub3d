@@ -1,14 +1,14 @@
 CC=gcc
+NAME=cub3d
 OBJ_DIR=obj/
 SRC_DIR=src/
+MLX_DIR=minilibx/
 INCLUDES=includes/
-CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES)
-NAME=cub3d
-HEADER= includes/cub3d.h includes/libft.h
-
+HEADER= $(INCLUDES)cub3d.h $(INCLUDES)libft.h
+MLX_FLAGS=-L./$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
+CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -lXext -lX11 -lm -lz -Lminilibx/ -lmlx_Linux
 CFILES=$(addprefix $(SRC_DIR), main.c parsing/parsing.c parsing/init_struct.c parsing/parsing_map.c\
 		parsing/name_map.c parsing/parsing_elem.c parsing/parsing_utils.c parsing/verif_valid_map.c)
-
 OBJS=$(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(CFILES))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -17,7 +17,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 $(NAME): $(OBJS) $(HEADER)
 	$(MAKE) -C libft/
-	$(CC) $(CFLAGS) $(OBJS) libft/bin/libft.a -o $(NAME)
+	$(MAKE) -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJS) libft/bin/libft.a -o $(NAME) $(MLX_FLAGS)
 
 all: $(NAME)
 
@@ -29,6 +30,7 @@ debug_sanitize: $(NAME)
 
 clean:
 	$(MAKE) clean -C libft/
+	$(MAKE) clean -C $(MLX_DIR)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
