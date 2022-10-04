@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hubretec <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 17:48:00 by hubretec          #+#    #+#             */
-/*   Updated: 2022/01/28 18:25:38 by hubretec         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:46:17 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ t_list	*ft_lstpop(t_list **lst, t_list *node)
 {
 	t_list	*tmp;
 	t_list	*pop;
+	t_list	*oui;
 
-	if (*(int *)(*lst)->content == *(int *)node->content)
+	if ((*lst)->content == node->content)
 		return (pop_first(lst));
-	if (*(int *)ft_lstlast(*lst)->content == *(int *)node->content)
+	oui = ft_lstlast(*lst);
+	if (oui->content == node->content)
 		return (pop_last(lst));
 	tmp = *lst;
 	while (tmp->next && *(int *)tmp->next->content != *(int *)node->content)

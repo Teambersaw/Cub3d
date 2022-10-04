@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstsearch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hubretec <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 11:24:10 by hubretec          #+#    #+#             */
-/*   Updated: 2022/01/15 11:25:19 by hubretec         ###   ########.fr       */
+/*   Created: 2022/05/16 13:51:56 by hubretec          #+#    #+#             */
+/*   Updated: 2022/05/17 04:04:25 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_list	*ft_lstdup(t_list *lst, void (*del)(void *))
+t_list	*ft_lstsearch(t_list **lst, void *data, size_t size)
 {
-	t_list	*new;
 	t_list	*tmp;
-	t_list	*tmp_node;
 
-	new = 0;
-	tmp = lst;
+	if (!lst)
+		return (NULL);
+	tmp = *lst;
 	while (tmp)
 	{
-		tmp_node = ft_lstnew(tmp->content, sizeof(tmp->content));
-		if (!tmp_node)
-		{
-			ft_lstclear(&new, del);
-			return (0);
-		}
-		ft_lstadd_back(&new, tmp_node);
+		if (!ft_memcmp(tmp->content, data, size))
+			return (tmp);
 		tmp = tmp->next;
 	}
-	return (new);
+	return (NULL);
 }

@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hubretec <hubretec@student.42.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 11:59:33 by jrossett          #+#    #+#             */
-/*   Updated: 2022/10/02 12:04:24 by jrossett         ###   ########.fr       */
+/*   Created: 2021/11/28 09:03:22 by hubretec          #+#    #+#             */
+/*   Updated: 2022/04/08 08:33:20 by hubretec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 
-int	line_len(char *str, int start)
+static int	mem_empty(char *memory)
+{
+	while (*memory)
+		if (*(memory++) != 127)
+			return (0);
+	return (1);
+}
+
+static int	line_len(char *str, int start)
 {
 	int	i;
 
@@ -28,15 +36,7 @@ int	line_len(char *str, int start)
 	return (i - start);
 }
 
-int	mem_empty(char *memory)
-{
-	while (*memory)
-		if (*(memory++) != 127)
-			return (0);
-	return (1);
-}
-
-char	*get_memory(int fd, int *bytes, char *memory)
+static char	*get_memory(int fd, int *bytes, char *memory)
 {
 	char	*tmp;
 
@@ -50,19 +50,20 @@ char	*get_memory(int fd, int *bytes, char *memory)
 		if (*bytes < 0)
 		{
 			free(tmp);
-			free(memory);
+			if (memory)
+				free(memory);
 			return (NULL);
 		}
 		if (!*bytes && !*tmp)
 			break ;
 		tmp[*bytes] = '\0';
-		memory = ft_strjoin(memory, tmp);
+		memory = ft_strjoin_free_s1(memory, tmp);
 	}
 	free(tmp);
 	return (memory);
 }
 
-char	*fill_line(char *memory)
+static char	*fill_line(char *memory)
 {
 	int		i;
 	int		j;
@@ -93,24 +94,24 @@ char	*get_next_line(int fd)
 {
 	int			bytes;
 	char		*line;
-	static char	*memory;
+	static char	*memory[MAX_FD];
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > MAX_FD)
 		return (NULL);
 	bytes = 1;
-	memory = get_memory(fd, &bytes, memory);
-	if (!memory)
+	memory[fd] = get_memory(fd, &bytes, memory[fd]);
+	if (!memory[fd])
 		return (NULL);
-	else if (!bytes && !*memory)
+	else if (!bytes && !*memory[fd])
 	{
-		free(memory);
+		free(memory[fd]);
 		return (NULL);
 	}
-	line = fill_line(memory);
-	if (mem_empty(memory))
+	line = fill_line(memory[fd]);
+	if (mem_empty(memory[fd]))
 	{
-		free(memory);
-		memory = NULL;
+		free(memory[fd]);
+		memory[fd] = 0;
 	}
 	return (line);
 }

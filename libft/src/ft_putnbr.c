@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   .c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hubretec <hubretec@student.42.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:26:30 by hubretec          #+#    #+#             */
-/*   Updated: 2022/05/16 15:05:50 by jrossett         ###   ########.fr       */
+/*   Created: 2021/12/19 18:13:24 by hubretec          #+#    #+#             */
+/*   Updated: 2022/03/15 17:40:29 by hubretec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
+#include "libft.h"
+#include <unistd.h>
 
-	i = 0;
-	if (s1 && s2)
+void	ft_putnbr(int nb)
+{
+	unsigned int	nbr;
+
+	if (nb < 0)
 	{
-		while (s1[i] && s2[i] && (s1[i] == s2[i]))
-		{
-			i++;
-		}
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		nbr = nb * -1;
+		write(1, "-", 1);
 	}
 	else
-		return (2);
+		nbr = nb;
+	if (nbr / 10)
+		ft_putnbr(nbr / 10);
+	ft_putchar(nbr % 10 + 48);
 }

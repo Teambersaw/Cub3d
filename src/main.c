@@ -37,11 +37,9 @@ int    main(int ac, char **av)
     t_map    map;
 
     map = ft_parsing(ac, av);
-    //print_tabb(map.map);
-    //print_elem(map.elem);
-	printf("pose en x: %d et pose en y: %d\n", map.x, map.y);
     if (map.value == 0)
-        ft_perror("invalid map", -1, NULL, &map);
+		 ft_perror("invalid map", -1, NULL, &map);
+	ft_putendl_fd("valid map", STDOUT_FILENO);
     ft_free_map(map);
     return (0);
 }
