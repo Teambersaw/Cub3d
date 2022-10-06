@@ -22,10 +22,10 @@ $(NAME): $(OBJS) $(HEADER)
 
 all: $(NAME)
 
-debug: CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g
+debug: CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g $(MLX_FLAGS)
 debug: $(NAME)
 
-debug_sanitize:CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g -fsanitize=address
+debug_sanitize:CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g -fsanitize=address $(MLX_FLAGS)
 debug_sanitize: $(NAME)
 
 clean:
@@ -37,7 +37,7 @@ fclean: clean
 	rm -rf libft/bin/libft.a
 	rm -rf $(NAME)
 
-sanitize:CFLAGS=-lreadline -Wall -Wextra -Werror -I $(INCLUDES) -fsanitize=address
+sanitize:CFLAGS=-lreadline -Wall -Wextra -Werror -I $(INCLUDES) -fsanitize=address $(MLX_FLAGS)
 sanitize: $(NAME)
 
 re: fclean all

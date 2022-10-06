@@ -5,4 +5,4 @@ libft/obj/
 .nfs*
 vgcore*
 cub3d
-*.cub
+maps/

@@ -65,21 +65,25 @@ int	ft_verif_map(t_map *map)
 	return (0);
 }
 
-t_map	ft_parsing(int ac, char **av)
+t_game	*ft_parsing(int ac, char **av)
 {
 	int		fd;
-	t_map	map;
+	t_game	*game;
 
 	fd = ft_verif_name(ac, av);
-	map = ft_init_map();
-	if (ft_parse_elem(fd, &map.elem) || ft_verif_elem(&map.elem))
-		return (close(fd), map);
-	map.map = ft_parse_map(fd, &map);
-	if (!map.map)
-		return (close(fd), map);
-	if (ft_verif_map(&map))
-		return (close(fd), map);
-	map.value = 1;
+	game = ft_init_game();
+	ft_init_map(game);
+	if (ft_parse_elem(fd, &game->map->elem) || ft_verif_elem(&game->map->elem))
+	{
+		ft_free_map(game->map);
+		return (close(fd), NULL);
+	}
+	game->map->map = ft_parse_map(fd, &game->map);
+	if (!game->map->map || ft_verif_elem(&game->map))
+	{
+		ft_free_map(game->map);
+		return (close(fd), NULL);
+	}
 	close(fd);
-	return (map);
+	return (game);
 }

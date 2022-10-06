@@ -37,18 +37,21 @@ int	ft_verif_elem(t_elem *elem)
 	return (0);
 }
 
-t_map	ft_init_map(void)
+void	ft_init_map(t_game *game)
 {
-	t_map	map;
-
-	map.map = NULL;
-	map.x = 0;
-	map.y = 0;
-	map.player = 0;
-	map.nb_player = 0;
-	map.elem = ft_init_elem();
-	map.value = 0;
-	return (map);
+	game->map = malloc(sizeof(t_map) * 1);
+	if (!game->map)
+	{
+		free(game);
+		ft_putendl_fd("Memory allocation error.", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+	game->map->map = NULL;
+	game->map->x = 0;
+	game->map->y = 0;
+	game->map->player = 0;
+	game->map->nb_player = 0;
+	game->map->elem = ft_init_elem();
 }
 
 t_elem	ft_init_elem(void)
@@ -69,4 +72,20 @@ t_elem	ft_init_elem(void)
 	elem.cg = 0;
 	elem.cb = 0;
 	return (elem);
+}
+
+t_game	*ft_init_game(void)
+{
+	t_game	*game;
+
+	game = malloc(sizeof(t_game) * 1);
+	if (!game)
+	{
+		ft_putendl_fd("Memory allocation error", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+	game->mlx = NULL;
+	game->mlx_win = NULL;
+	game->map = NULL;
+	return (game);
 }

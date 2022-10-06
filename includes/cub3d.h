@@ -2,12 +2,14 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 
 typedef struct s_elem
 {
@@ -33,9 +35,15 @@ typedef struct s_map
 	int		y;
 	char	player;
 	int		nb_player;
-	int		value;
 	t_elem	elem;
 }	t_map;
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_map	*map;
+}	t_game;
 
 // -----------------------------PARSING-----------------------------
 
@@ -48,13 +56,14 @@ int			ft_parse_elem(int fd, t_elem *elem);
 char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map);
 
-void		ft_free_map(t_map map);
+void		ft_free_map(t_map *map);
 void		ft_free_tab(char **tab);
+void		ft_init_map(t_game *game);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
 
-t_map		ft_init_map(void);
-t_map		ft_parsing(int ac, char **av);
-
 t_elem		ft_init_elem(void);
+
+t_game		*ft_init_game(void);
+t_game		*ft_parsing(int ac, char **av);
 
 #endif
