@@ -10,20 +10,6 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-typedef struct s_img
-{
-	char	value;
-	char	*path;
-	void	*img;
-}	t_img;
-
-typedef struct s_assets
-{
-	int		size;
-	t_img	wall;
-	t_img	empty;
-}	t_assets;
-
 typedef struct s_elem
 {
 	char	*no;
@@ -51,11 +37,11 @@ typedef struct s_map
 	char		player;
 	int			nb_player;
 	t_elem		*elem;
-	t_assets	assets;
 }	t_map;
 
 typedef struct s_game
 {
+	int		size;
 	void	*mlx;
 	void	*mlx_win;
 	t_map	*map;
@@ -77,6 +63,7 @@ char		**ft_parse_map(int fd, t_map *map);
 
 void		ft_free_tab(char **tab);
 void		ft_init_map(t_map *map);
+void		init_window(t_game *game);
 void		ft_init_elem(t_elem *elem);
 void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		ft_perror(char *str, int fd, char *line, t_map *map);

@@ -41,11 +41,8 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	map = ft_parsing(ac, av);
-	if (!map)
-		ft_perror("invalid map", -1, NULL, map);
 	game = init_game(map);
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1920, 1080, "Cub3D");
+	init_window(game);
 	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
 	mlx_hook(game->mlx_win, 17, (1 << 0), exit_game, game);
 	mlx_loop(game->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hubretec <hubretec@student.42.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 12:18:58 by hubretec          #+#    #+#             */
-/*   Updated: 2022/09/15 14:05:56 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:46:07 by hubretec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void				*ft_lstdelone(t_list *lst, void (*del)(void *));
 void				*ft_lstclear(t_list **lst, void (*del)(void *));
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 
+size_t				tablen(char **tab);
 size_t				ft_strlen(char const *str);
 size_t				ft_strlclen(const char *str, char *charset);
 size_t				ft_strlcat(char *dst, char *src, size_t size);

@@ -100,6 +100,7 @@ t_game	*init_game(t_map *map)
 	game = malloc(sizeof(t_game) * 1);
 	if (!game)
 		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
+	game->size = 32;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->map = map;
