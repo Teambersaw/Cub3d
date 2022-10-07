@@ -59,7 +59,9 @@ char		**ft_parse_map(int fd, t_map *map);
 void		ft_free_tab(char **tab);
 void		ft_init_map(t_map *map);
 void		ft_init_elem(t_elem *elem);
+void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
+void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
 
 void		*ft_free_map(t_map *map);
 void		*ft_free_game(t_game *game);

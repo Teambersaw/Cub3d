@@ -76,17 +76,20 @@ t_map	*ft_parsing(int ac, char **av)
 	ft_init_map(map);
 	map->elem = malloc(sizeof(t_elem) * 1);
 	if (!map->elem)
-		return (ft_free_map(map));
+		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
 	ft_init_elem(map->elem);
 	fd = ft_verif_name(ac, av);
 	if (ft_parse_elem(fd, map->elem) || ft_verif_elem(map->elem))
-		return (close(fd), ft_free_map(map));
+	{
+		close(fd);
+		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
+	}
 	map->map = ft_parse_map(fd, map);
-	if (!map->map)
-		return (close(fd), ft_free_map(map));
-	if (ft_verif_map(map))
-		return (close(fd), ft_free_map(map));
 	close(fd);
+	if (!map->map)
+		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
+	if (ft_verif_map(map))
+		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
 	return (map);
 }
 
@@ -96,7 +99,7 @@ t_game	*init_game(t_map *map)
 
 	game = malloc(sizeof(t_game) * 1);
 	if (!game)
-		return (ft_free_map(map));
+		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->map = map;
