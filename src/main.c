@@ -35,20 +35,6 @@ void	print_elem(t_elem elem)
 	print_tab(elem.f, "sol");
 }
 
-int	exit_game(t_game *game)
-{
-	ft_free_game(game);
-	exit(EXIT_SUCCESS);
-	return (1);
-}
-
-int	do_event(int keycode, t_game *game)
-{
-	if (keycode == 65307)
-		exit_game(game);
-	return (1);
-}
-
 int	main(int ac, char **av)
 {
 	t_map	*map;
@@ -57,7 +43,6 @@ int	main(int ac, char **av)
 	map = ft_parsing(ac, av);
 	if (!map)
 		ft_perror("invalid map", -1, NULL, map);
-	ft_putendl_fd("valid map", STDOUT_FILENO);
 	game = init_game(map);
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, 1920, 1080, "Cub3D");

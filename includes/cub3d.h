@@ -10,6 +10,20 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
+typedef struct s_img
+{
+	char	value;
+	char	*path;
+	void	*img;
+}	t_img;
+
+typedef struct s_assets
+{
+	int		size;
+	t_img	wall;
+	t_img	empty;
+}	t_assets;
+
 typedef struct s_elem
 {
 	char	*no;
@@ -29,12 +43,15 @@ typedef struct s_elem
 
 typedef struct s_map
 {
-	char	**map;
-	int		x;
-	int		y;
-	char	player;
-	int		nb_player;
-	t_elem	*elem;
+	char		**map;
+	int			x;
+	int			y;
+	int			size_x;
+	int			size_y;
+	char		player;
+	int			nb_player;
+	t_elem		*elem;
+	t_assets	assets;
 }	t_map;
 
 typedef struct s_game
@@ -48,10 +65,12 @@ typedef struct s_game
 // -----------------------------PARSING-----------------------------
 
 int			ft_mid_map(t_map *map);
+int			exit_game(t_game *game);
 int			ft_atoi_2(const char *nptr);
 int			ft_verif_elem(t_elem *elem);
 int			ft_verif_name(int ac, char **av);
 int			ft_parse_elem(int fd, t_elem *elem);
+int			do_event(int keycode, t_game *game);
 
 char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map);
