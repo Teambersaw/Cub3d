@@ -1,13 +1,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "mlx.h"
 # include "libft.h"
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
-# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 
 typedef struct s_elem
 {
@@ -61,6 +62,7 @@ void		ft_init_elem(t_elem *elem);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
 
 void		*ft_free_map(t_map *map);
+void		*ft_free_game(t_game *game);
 
 t_map		*ft_parsing(int ac, char **av);
 

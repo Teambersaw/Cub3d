@@ -15,6 +15,7 @@ void	*ft_free_elem(t_elem *elem)
 	if (elem->c)
 		ft_free_tab(elem->c);
 	free(elem);
+	elem = NULL;
 	return (NULL);
 }
 
@@ -37,5 +38,25 @@ void	*ft_free_map(t_map *map)
 	if (map->map)
 		ft_free_tab(map->map);
 	free(map);
+	map = NULL;
+	return (NULL);
+}
+
+void	destroy_mlx(void *mlx, void *ptr, int mode)
+{
+	if (!mode && mlx && ptr)
+		mlx_destroy_window(mlx, ptr);
+	else if (mode == 1 && mlx)
+		mlx_destroy_display(mlx);
+}
+
+void	*ft_free_game(t_game *game)
+{
+	if (game->map)
+		ft_free_map(game->map);
+	destroy_mlx(game->mlx, game->mlx_win, 0);
+	destroy_mlx(game->mlx, NULL, 1);
+	free(game);
+	game = NULL;
 	return (NULL);
 }

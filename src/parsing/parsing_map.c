@@ -11,7 +11,7 @@ char	*ft_joinmap(int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		join = ft_strjoin(join, line);
+		join = ft_strjoin_free_s1(join, line);
 		if (!join)
 			return (NULL);
 		free(line);

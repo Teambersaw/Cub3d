@@ -46,6 +46,6 @@ int	main(int ac, char **av)
 	game = init_game(map);
 	(void)game;
 	ft_putendl_fd("valid map", STDOUT_FILENO);
-	ft_free_map(map);
+	ft_free_game(game);
 	return (0);
 }
