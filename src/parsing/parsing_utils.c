@@ -1,35 +1,5 @@
 #include "cub3d.h"
 
-void	ft_free_map(t_map *map)
-{
-	if (map->elem.so)
-		free(map->elem.so);
-	if (map->elem.no)
-		free(map->elem.no);
-	if (map->elem.we)
-		free(map->elem.we);
-	if (map->elem.ea)
-		free(map->elem.ea);
-	if (map->elem.f)
-		ft_free_tab(map->elem.f);
-	if (map->elem.c)
-		ft_free_tab(map->elem.c);
-	if (map->map)
-		ft_free_tab(map->map);
-}
-
-void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab && tab[++i])
-		free(tab[i]);
-	if (tab)
-		free(tab);
-	tab = NULL;
-}
-
 char	*ft_strdup_2(char *src, char c)
 {
 	int		i;

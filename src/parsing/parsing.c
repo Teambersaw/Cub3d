@@ -65,25 +65,40 @@ int	ft_verif_map(t_map *map)
 	return (0);
 }
 
-t_game	*ft_parsing(int ac, char **av)
+t_map	*ft_parsing(int ac, char **av)
 {
 	int		fd;
+	t_map	*map;
+
+	map = malloc(sizeof(t_map) * 1);
+	if (!map)
+		return (NULL);
+	ft_init_map(map);
+	map->elem = malloc(sizeof(t_elem) * 1);
+	if (!map->elem)
+		return (ft_free_map(map));
+	ft_init_elem(map->elem);
+	fd = ft_verif_name(ac, av);
+	if (ft_parse_elem(fd, map->elem) || ft_verif_elem(map->elem))
+		return (close(fd), ft_free_map(map));
+	map->map = ft_parse_map(fd, map);
+	if (!map->map)
+		return (close(fd), ft_free_map(map));
+	if (ft_verif_map(map))
+		return (close(fd), ft_free_map(map));
+	close(fd);
+	return (map);
+}
+
+t_game	*init_game(t_map *map)
+{
 	t_game	*game;
 
-	fd = ft_verif_name(ac, av);
-	game = ft_init_game();
-	ft_init_map(game);
-	if (ft_parse_elem(fd, &game->map->elem) || ft_verif_elem(&game->map->elem))
-	{
-		ft_free_map(game->map);
-		return (close(fd), NULL);
-	}
-	game->map->map = ft_parse_map(fd, &game->map);
-	if (!game->map->map || ft_verif_elem(&game->map))
-	{
-		ft_free_map(game->map);
-		return (close(fd), NULL);
-	}
-	close(fd);
+	game = malloc(sizeof(t_game) * 1);
+	if (!game)
+		return (ft_free_map(map));
+	game->mlx = NULL;
+	game->mlx_win = NULL;
+	game->map = map;
 	return (game);
 }

@@ -37,15 +37,15 @@ void	print_elem(t_elem elem)
 
 int	main(int ac, char **av)
 {
+	t_map	*map;
 	t_game	*game;
 
-	game = ft_parsing(ac, av);
-	if (!game)
-		ft_perror("invalid map", -1, NULL, game->map);
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1920, 1080, "Cub3D");
-	mlx_hook(game->mlx_win, 2, (1 << 0), quit, game);
-	mlx_loop(game->mlx);
-	quit(game);
+	map = ft_parsing(ac, av);
+	if (!map)
+		ft_perror("invalid map", -1, NULL, map);
+	game = init_game(map);
+	(void)game;
+	ft_putendl_fd("valid map", STDOUT_FILENO);
+	ft_free_map(map);
 	return (0);
 }

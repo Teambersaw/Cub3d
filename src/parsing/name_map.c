@@ -3,7 +3,7 @@
 void	ft_perror(char *str, int fd, char *line, t_map *map)
 {
 	if (map != NULL)
-		ft_free_map(*map);
+		ft_free_map(map);
 	if (line)
 		free(line);
 	if (fd >= 0)
