@@ -93,6 +93,18 @@ t_map	*ft_parsing(int ac, char **av)
 	return (map);
 }
 
+t_img	*init_img(void)
+{
+	t_img	*img;
+
+	img = malloc(sizeof(t_img) * 1);
+	if (!img)
+		return (NULL);
+	img->img = NULL;
+	img->addr = NULL;
+	return (img);
+}
+
 t_game	*init_game(t_map *map)
 {
 	t_game	*game;
@@ -100,9 +112,12 @@ t_game	*init_game(t_map *map)
 	game = malloc(sizeof(t_game) * 1);
 	if (!game)
 		exit_msg(map, NULL, EXIT_FAILURE, "Memory allocation error.");
-	game->size = 32;
+	game->size = 128;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->map = map;
+	game->img = init_img();
+	if (!game->img)
+		return (ft_free_game(game));
 	return (game);
 }

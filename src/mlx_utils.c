@@ -6,6 +6,20 @@ void	destroy_mlx(void *mlx, void *ptr, int mode)
 		mlx_destroy_window(mlx, ptr);
 	else if (mode == 1 && mlx)
 		mlx_destroy_display(mlx);
+	else if (mode == 2 && mlx && ptr)
+	{
+		mlx_destroy_image(mlx, ptr);
+		mlx = NULL;
+		ptr = NULL;
+	}
+}
+
+void	mlx_put_pixel(t_game *game, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = game->img->addr + (y * game->img->len + x * (game->img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 int	exit_game(t_game *game)

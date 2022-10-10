@@ -44,12 +44,21 @@ void	*ft_free_map(t_map *map)
 	return (NULL);
 }
 
+void	*ft_free_img(t_game *game)
+{
+	destroy_mlx(game->mlx, game->img->img, 2);
+	free(game->img);
+	return (NULL);
+}
+
 void	*ft_free_game(t_game *game)
 {
 	if (!game)
 		return (NULL);
 	if (game->map)
 		ft_free_map(game->map);
+	if (game->img)
+		ft_free_img(game);
 	destroy_mlx(game->mlx, game->mlx_win, 0);
 	destroy_mlx(game->mlx, NULL, 1);
 	free(game->mlx);

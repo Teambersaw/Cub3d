@@ -27,6 +27,15 @@ typedef struct s_elem
 	int		cb;
 }	t_elem;
 
+typedef struct s_img
+{
+	int		len;
+	int		bpp;
+	int		endian;
+	void	*img;
+	char	*addr;
+}	t_img;
+
 typedef struct s_map
 {
 	char		**map;
@@ -45,8 +54,8 @@ typedef struct s_game
 	void	*mlx;
 	void	*mlx_win;
 	t_map	*map;
+	t_img	*img;
 }	t_game;
-
 
 // -----------------------------PARSING-----------------------------
 
@@ -67,6 +76,7 @@ void		init_window(t_game *game);
 void		ft_init_elem(t_elem *elem);
 void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
+void		mlx_put_pixel(t_game *game, int x, int y, int color);
 void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
 
 void		*ft_free_map(t_map *map);
