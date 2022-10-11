@@ -59,6 +59,8 @@ void	*ft_free_game(t_game *game)
 		ft_free_map(game->map);
 	if (game->img)
 		ft_free_img(game);
+	free(game->player);
+	game->player = NULL;
 	destroy_mlx(game->mlx, game->mlx_win, 0);
 	destroy_mlx(game->mlx, NULL, 1);
 	free(game->mlx);
@@ -66,15 +68,4 @@ void	*ft_free_game(t_game *game)
 	free(game);
 	game = NULL;
 	return (NULL);
-}
-
-void	exit_msg(t_map *map, t_game *game, int exit_code, char *msg)
-{
-	if (exit_code && msg)
-		ft_putendl_fd(msg, STDERR_FILENO);
-	else if (msg)
-		ft_putendl_fd(msg, STDOUT_FILENO);
-	ft_free_game(game);
-	ft_free_map(map);
-	exit(exit_code);
 }

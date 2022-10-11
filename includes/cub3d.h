@@ -3,12 +3,19 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+
+typedef struct s_pos
+{
+	float	x;
+	float	y;
+}	t_pos;
 
 typedef struct s_elem
 {
@@ -36,31 +43,35 @@ typedef struct s_img
 	char	*addr;
 }	t_img;
 
+typedef struct s_player
+{
+	char		player;
+	float		x;
+	float		y;
+	float		speed;
+}	t_player;
+
 typedef struct s_map
 {
-	char		**map;
-	int			x;
-	int			y;
-	int			size_x;
-	int			size_y;
-	char		player;
 	int			nb_player;
+	char		**map;
 	t_elem		*elem;
 }	t_map;
 
 typedef struct s_game
 {
-	int		size;
-	void	*mlx;
-	void	*mlx_win;
-	t_map	*map;
-	t_img	*img;
+	int			size;
+	void		*mlx;
+	void		*mlx_win;
+	t_map		*map;
+	t_img		*img;
+	t_player	*player;
 }	t_game;
 
 // -----------------------------PARSING-----------------------------
 
-int			ft_mid_map(t_map *map);
 int			exit_game(t_game *game);
+int			ft_mid_map(t_game *game);
 int			ft_atoi_2(const char *nptr);
 int			ft_verif_elem(t_elem *elem);
 int			ft_verif_name(int ac, char **av);
@@ -68,22 +79,31 @@ int			ft_parse_elem(int fd, t_elem *elem);
 int			do_event(int keycode, t_game *game);
 
 char		*ft_strdup_2(char *src, char c);
-char		**ft_parse_map(int fd, t_map *map);
+char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
+void		move_up(t_game *game);
+void		move_down(t_game *game);
+void		move_left(t_game *game);
 void		ft_free_tab(char **tab);
-void		ft_init_map(t_map *map);
+void		move_right(t_game *game);
 void		init_window(t_game *game);
-void		ft_init_elem(t_elem *elem);
 void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		ft_perror(char *str, int fd, char *line, t_map *map);
 void		mlx_put_pixel(t_game *game, int x, int y, int color);
+void		display_player(t_game *game, int x, int y, int color);
+void		display_square(t_game *game, int x, int y, int color);
 void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
+void		mlx_draw_rectangle(t_game *game, t_pos pos, float w, float h, int color);
 
 void		*ft_free_map(t_map *map);
 void		*ft_free_game(t_game *game);
 
-t_map		*ft_parsing(int ac, char **av);
+t_img		*init_img(void);
 
-t_game		*init_game(t_map *map);
+t_map		*ft_init_map(void);
+
+t_game		*ft_parsing(int ac, char **av);
+
+t_player	*init_player(void);
 
 #endif

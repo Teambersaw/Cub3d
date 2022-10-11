@@ -19,7 +19,7 @@ char	*ft_joinmap(int fd)
 	return (join);
 }
 
-char	*ft_verif_join(char *new_j, t_map *map)
+char	*ft_verif_join(char *new_j, t_map *map, t_player *player)
 {
 	char	*j;
 	int		i;
@@ -39,7 +39,7 @@ char	*ft_verif_join(char *new_j, t_map *map)
 			return (free(j), NULL);
 		if (j[i] == 'S' || j[i] == 'N' || j[i] == 'E' || j[i] == 'W')
 		{
-			map->player = j[i];
+			player->player = j[i];
 			map->nb_player += 1;
 		}
 	}
@@ -67,7 +67,7 @@ int	ft_double_nl(char *join)
 	return (0);
 }
 
-char	**ft_parse_map(int fd, t_map *map)
+char	**ft_parse_map(int fd, t_map *map, t_player *player)
 {
 	char	**tab;
 	char	*join;
@@ -76,7 +76,7 @@ char	**ft_parse_map(int fd, t_map *map)
 	join = ft_joinmap(fd);
 	if (!join)
 		return (NULL);
-	new_join = ft_verif_join(join, map);
+	new_join = ft_verif_join(join, map, player);
 	if (!new_join)
 		return (NULL);
 	if (new_join[ft_strlen(new_join) - 1] == '\n' || ft_double_nl(new_join))

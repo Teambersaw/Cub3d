@@ -1,11 +1,32 @@
 #include "cub3d.h"
 
+void	display_player(t_game *game, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = y;
+	while (i < y + 20)
+	{
+		j = x;
+		while (j < x + 20)
+			mlx_put_pixel(game, j++, i, color);
+		i++;
+	}
+}
+
+
 void	display_square(t_game *game, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	i = y;
+	if (color == 0x0000ff)
+	{
+		display_player(game, x, y, color);
+		return ;
+	}
 	while (i < y + game->size)
 	{
 		j = x;
@@ -32,7 +53,7 @@ void	display_map(t_game *game)
 			else if (game->map->map[i][j] == '0')
 				color = 0x00FF00;
 			else if (game->map->map[i][j] == 'N')
-				color = 0x0000FF;
+				color = 0x0000ff;
 			display_square(game, j * game->size, i * game->size, color);
 		}
 	}

@@ -37,11 +37,14 @@ void	print_elem(t_elem elem)
 
 int	main(int ac, char **av)
 {
-	t_map	*map;
 	t_game	*game;
 
-	map = ft_parsing(ac, av);
-	game = init_game(map);
+	game = ft_parsing(ac, av);
+	if (!game)
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	init_window(game);
 	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
 	mlx_hook(game->mlx_win, 17, (1 << 0), exit_game, game);

@@ -6,3 +6,6 @@ libft/obj/
 vgcore*
 cub3d
 maps/
+*.json
+.cache/
+

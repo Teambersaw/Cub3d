@@ -28,10 +28,3 @@ int	exit_game(t_game *game)
 	exit(EXIT_SUCCESS);
 	return (1);
 }
-
-int	do_event(int keycode, t_game *game)
-{
-	if (keycode == 65307)
-		exit_game(game);
-	return (1);
-}
