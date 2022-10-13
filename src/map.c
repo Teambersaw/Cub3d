@@ -15,17 +15,18 @@ void	display_player(t_game *game, int x, int y, int color)
 	}
 }
 
-
 void	display_square(t_game *game, int x, int y, int color)
 {
 	int	i;
 	int	j;
+	int	player;
 
 	i = y;
+	player = 0;
 	if (color == 0x0000ff)
 	{
-		display_player(game, x, y, color);
-		return ;
+		color = 0x00ff00;
+		player = 1;
 	}
 	while (i < y + game->size)
 	{
@@ -34,6 +35,8 @@ void	display_square(t_game *game, int x, int y, int color)
 			mlx_put_pixel(game, j++, i, color);
 		i++;
 	}
+	if (player)
+		display_player(game, x, y, 0x0000ff);
 }
 
 void	display_map(t_game *game)

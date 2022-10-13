@@ -5,7 +5,6 @@ libft/obj/
 .nfs*
 vgcore*
 cub3d
-maps/
 *.json
 .cache/
 

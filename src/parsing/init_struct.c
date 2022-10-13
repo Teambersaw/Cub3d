@@ -48,6 +48,18 @@ t_img	*init_img(void)
 	return (img);
 }
 
+t_pos	*init_pos(void)
+{
+	t_pos	*pos;
+
+	pos = malloc(sizeof(t_pos) * 1);
+	if (!pos)
+		return (NULL);
+	pos->x = 0;
+	pos->y = 0;
+	return (pos);
+}
+
 t_player	*init_player(void)
 {
 	t_player	*player;
@@ -57,7 +69,6 @@ t_player	*init_player(void)
 		return (NULL);
 	player->speed = 0.1f;
 	player->player = 0;
-	player->x = 0;
-	player->y = 0;
+	player->pos = init_pos();
 	return (player);
 }

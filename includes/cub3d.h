@@ -46,9 +46,8 @@ typedef struct s_img
 typedef struct s_player
 {
 	char		player;
-	float		x;
-	float		y;
 	float		speed;
+	t_pos		*pos;
 }	t_player;
 
 typedef struct s_map
@@ -93,7 +92,7 @@ void		mlx_put_pixel(t_game *game, int x, int y, int color);
 void		display_player(t_game *game, int x, int y, int color);
 void		display_square(t_game *game, int x, int y, int color);
 void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
-void		mlx_draw_rectangle(t_game *game, t_pos pos, float w, float h, int color);
+void		mlx_draw_rectangle(t_game *game, t_pos pos, t_pos dims, int color);
 
 void		*ft_free_map(t_map *map);
 void		*ft_free_game(t_game *game);

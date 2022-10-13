@@ -59,6 +59,7 @@ void	*ft_free_game(t_game *game)
 		ft_free_map(game->map);
 	if (game->img)
 		ft_free_img(game);
+	free(game->player->pos);
 	free(game->player);
 	game->player = NULL;
 	destroy_mlx(game->mlx, game->mlx_win, 0);
