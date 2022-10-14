@@ -102,5 +102,6 @@ t_game	*ft_parsing(int ac, char **av)
 		return (ft_free_game(game));
 	if (ft_verif_map(game))
 		return (ft_free_game(game));
+	ft_color(game->map->elem);
 	return (game);
 }
