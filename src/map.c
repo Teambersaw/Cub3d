@@ -77,5 +77,6 @@ void	init_window(t_game *game)
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp,
 			&game->img->len, &game->img->endian);
 	display_map(game);
+	draw_ray(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
 }

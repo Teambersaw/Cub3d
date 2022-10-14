@@ -17,4 +17,3 @@ void	draw_rectangle(t_game *game, t_pos pos, t_pos dims, int color)
 		i++;
 	}
 }
-
