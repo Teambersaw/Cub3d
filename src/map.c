@@ -52,15 +52,14 @@ void	display_map(t_game *game)
 		while (game->map->map[i][++j])
 		{
 			if (game->map->map[i][j] == '1' || game->map->map[i][j] == 'm')
-				color = 0xFF0000;
+				color = 0xff0000;
 			else if (game->map->map[i][j] == '0')
-				color = 0x00FF00;
+				color = 0x00ff00;
 			else if (game->map->map[i][j] == 'N')
 				color = 0x0000ff;
 			display_square(game, j * game->size, i * game->size, color);
 		}
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
 }
 
 void	init_window(t_game *game)
@@ -78,4 +77,5 @@ void	init_window(t_game *game)
 	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp,
 			&game->img->len, &game->img->endian);
 	display_map(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
 }

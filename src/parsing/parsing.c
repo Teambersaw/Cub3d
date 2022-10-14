@@ -90,6 +90,8 @@ t_game	*ft_parsing(int ac, char **av)
 	t_game	*game;
 
 	game = init_game();
+	game->ray.angle = 0;
+	game->ray.length = 0;
 	fd = ft_verif_name(ac, av);
 	if (ft_parse_elem(fd, game->map->elem) || ft_verif_elem(game->map->elem))
 	{
