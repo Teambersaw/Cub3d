@@ -1,5 +1,11 @@
 #include "cub3d.h"
 
+void	ft_color(t_elem *elem)
+{
+	elem->ccolor = (elem->cr << 16) + (elem->cg << 8) + elem->cb;
+	elem->fcolor = (elem->fr << 16) + (elem->fg << 8) + elem->fb;
+}
+
 void	ft_perror(char *str, int fd, char *line, t_map *map)
 {
 	if (map != NULL)

@@ -32,6 +32,8 @@ typedef struct s_elem
 	int		cr;
 	int		cg;
 	int		cb;
+	int		fcolor;
+	int		ccolor;
 }	t_elem;
 
 typedef struct s_img
@@ -75,8 +77,6 @@ typedef struct s_game
 	t_player	*player;
 }	t_game;
 
-// -----------------------------PARSING-----------------------------
-
 int			exit_game(t_game *game);
 int			ft_mid_map(t_game *game);
 int			ft_atoi_2(const char *nptr);
@@ -90,6 +90,7 @@ char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
 void		move_up(t_game *game);
 void		draw_ray(t_game *game);
+void		ft_color(t_elem *elem);
 void		move_down(t_game *game);
 void		move_left(t_game *game);
 void		ft_free_tab(char **tab);

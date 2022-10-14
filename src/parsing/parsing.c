@@ -89,10 +89,8 @@ t_game	*ft_parsing(int ac, char **av)
 	int		fd;
 	t_game	*game;
 
-	game = init_game();
-	game->ray.angle = 0;
-	game->ray.length = 0;
 	fd = ft_verif_name(ac, av);
+	game = init_game();
 	if (ft_parse_elem(fd, game->map->elem) || ft_verif_elem(game->map->elem))
 	{
 		close(fd);
@@ -104,5 +102,6 @@ t_game	*ft_parsing(int ac, char **av)
 		return (ft_free_game(game));
 	if (ft_verif_map(game))
 		return (ft_free_game(game));
+	ft_color(game->map->elem);
 	return (game);
 }

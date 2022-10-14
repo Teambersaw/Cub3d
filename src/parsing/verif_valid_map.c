@@ -21,9 +21,7 @@ int	ft_open_map(t_game *game, size_t x, size_t y)
 {
 	size_t	i;
 
-	i = 0;
-	while (game->map->map[i])
-		i++;
+	i = tablen(game->map->map);
 	if (x == 0 || x == (i - 1) || y == 0
 		|| y == ft_strlen(game->map->map[x]) - 1)
 	{

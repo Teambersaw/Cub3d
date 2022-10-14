@@ -20,6 +20,8 @@ t_elem	*ft_init_elem(void)
 	elem->cr = 0;
 	elem->cg = 0;
 	elem->cb = 0;
+	elem->fcolor = 0;
+	elem->ccolor = 0;
 	return (elem);
 }
 
