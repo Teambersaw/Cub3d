@@ -52,15 +52,14 @@ void	display_map(t_game *game)
 		while (game->map->map[i][++j])
 		{
 			if (game->map->map[i][j] == '1' || game->map->map[i][j] == 'm')
-				color = 0xFF0000;
+				color = 0xff0000;
 			else if (game->map->map[i][j] == '0')
-				color = 0x00FF00;
+				color = 0x00ff00;
 			else if (game->map->map[i][j] == 'N')
 				color = 0x0000ff;
 			display_square(game, j * game->size, i * game->size, color);
 		}
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[0]->img, 0, 0);
 }
 
 void	init_window(t_game *game)
@@ -69,7 +68,10 @@ void	init_window(t_game *game)
 	if (!game->mlx)
 		exit_game(game, ERR_MLX, -1);
 	ft_create_img(game);
-	game->mlx_win = mlx_new_window(game->mlx, 600, 600, "Cub3D");
+	game->mlx_win = mlx_new_window(game->mlx, 768, 640, "Cub3D");
 	if (!game->mlx_win)
 		exit_game(game, ERR_WIN, -1);
+	display_map(game);
+	draw_ray(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[0]->img, 0, 0);
 }

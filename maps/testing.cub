@@ -1,14 +1,10 @@
-
-     NO    assets/nord.xpm
-   C  4 , 41 , 44   
-
- EA    assets/est.xpm
-  F    +4  , 0255 ,  4
-   SO    assets/sud.xpm
-
-
+NO assets/nord.xpm
+SO assets/sud.xpm
 WE assets/ouest.xpm
+EA assets/est.xpm
 
+F 220,100,0
+C 225,30,0
 
 111111
 100101

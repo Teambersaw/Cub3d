@@ -74,7 +74,7 @@ t_player	*init_player(void)
 	player = malloc(sizeof(t_player) * 1);
 	if (!player)
 		return (NULL);
-	player->speed = 0.1f;
+	player->speed = 10;
 	player->player = 0;
 	player->pos = init_pos();
 	if (!player->pos)

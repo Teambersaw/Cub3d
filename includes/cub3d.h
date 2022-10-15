@@ -71,6 +71,13 @@ typedef struct s_map
 	t_elem		*elem;
 }	t_map;
 
+typedef struct s_ray
+{
+	int		angle;
+	int		length;
+	t_pos	pos;
+}	t_ray;
+
 typedef struct s_game
 {
 	int			size;
@@ -78,6 +85,7 @@ typedef struct s_game
 	void		*mlx_win;
 	t_map		*map;
 	t_img		**img;
+	t_ray		ray;
 	t_player	*player;
 }	t_game;
 
@@ -94,6 +102,7 @@ char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
 void		move_up(t_game *game);
+void		draw_ray(t_game *game);
 void		ft_color(t_elem *elem);
 void		ft_perror(char *error);
 void		move_down(t_game *game);
