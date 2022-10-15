@@ -44,29 +44,42 @@ void	*ft_free_map(t_map *map)
 	return (NULL);
 }
 
-void	*ft_free_img(t_game *game)
+void	*ft_free_img(t_game *game, int var)
 {
-	destroy_mlx(game->mlx, game->img->img, 2);
+	int	i;
+
+	i = -1;
+	while (++i < var)
+	{
+		destroy_mlx(game->mlx, game->img[i]->img, 2);
+		free(game->img[i]);
+	}
 	free(game->img);
 	return (NULL);
 }
 
-void	*ft_free_game(t_game *game)
+void	*ft_free_game(t_game *game, int var)
 {
 	if (!game)
 		return (NULL);
 	if (game->map)
 		ft_free_map(game->map);
+	if (!game->img)
+		return (free(game), NULL);
 	if (game->img)
-		ft_free_img(game);
-	free(game->player->pos);
-	free(game->player);
-	game->player = NULL;
-	destroy_mlx(game->mlx, game->mlx_win, 0);
-	destroy_mlx(game->mlx, NULL, 1);
-	free(game->mlx);
-	game->mlx = NULL;
-	free(game);
-	game = NULL;
+	{
+		if (var < 0)
+			ft_free_img(game, 5);
+		else
+			ft_free_img(game, var);
+		if (var >= 0)
+			return (free(game), NULL);
+	}
+	if (var == -2)
+	{
+		free(game->player);
+		return (free(game), NULL);
+	}
+	ft_free_game_2(game);
 	return (NULL);
 }

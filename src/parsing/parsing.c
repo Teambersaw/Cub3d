@@ -68,19 +68,26 @@ int	ft_verif_map(t_game *game)
 
 t_game	*init_game(void)
 {
+	int		i;
 	t_game	*game;
 
+	i = -1;
 	game = malloc(sizeof(t_game) * 1);
 	if (!game)
-		exit_game(game);
+		exit_game(game, ERR_MALLOC, -1);
 	game->size = 128;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->map = ft_init_map();
-	game->img = init_img();
+	game->img = malloc(sizeof(t_img) * 5);
+	if (!game->img)
+		exit_game(game, ERR_MALLOC, -1);
+	ft_ver_img(i, game);
 	game->player = init_player();
-	if (!game->img || !game->player || !game->map)
-		exit_game(game);
+	if (!game->player)
+		exit_game(game, ERR_MALLOC, -2);
+	if (!game->map)
+		exit_game(game, ERR_MALLOC, -1);
 	return (game);
 }
 
@@ -94,14 +101,14 @@ t_game	*ft_parsing(int ac, char **av)
 	if (ft_parse_elem(fd, game->map->elem) || ft_verif_elem(game->map->elem))
 	{
 		close(fd);
-		return (ft_free_game(game));
+		exit_game(game, ERR_ELEM, -1);
 	}
 	game->map->map = ft_parse_map(fd, game->map, game->player);
 	close(fd);
 	if (!game->map->map)
-		return (ft_free_game(game));
+		exit_game(game, ERR_MAP, -1);
 	if (ft_verif_map(game))
-		return (ft_free_game(game));
+		exit_game(game, ERR_MAP, -1);
 	ft_color(game->map->elem);
 	return (game);
 }

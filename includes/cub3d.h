@@ -11,6 +11,18 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
+# define ERR_DIR "This is a directory."
+# define ERR_MAP "Invalid map in the file."
+# define ERR_FILE "This is not a valid file."
+# define ERR_MLX "Failure while creating mlx."
+# define ERR_IMG "Failure while creating image."
+# define ERR_ELEM "Invalid element in the file."
+# define ERR_WIN "Failure while creating mlx_window."
+# define ERR_ARGS "The program takes only one argument."
+# define ERR_MALLOC "Failure while allocating the heap."
+# define ERR_ADDR "Failure while creating images address."
+# define ERR_NAME "Invalid name: map shoud be a \"\%.cub\" format."
+
 typedef struct s_pos
 {
 	float	x;
@@ -65,30 +77,33 @@ typedef struct s_game
 	void		*mlx;
 	void		*mlx_win;
 	t_map		*map;
-	t_img		*img;
+	t_img		**img;
 	t_player	*player;
 }	t_game;
 
-int			exit_game(t_game *game);
 int			ft_mid_map(t_game *game);
+int			exit_game_v(t_game *game);
 int			ft_atoi_2(const char *nptr);
 int			ft_verif_elem(t_elem *elem);
 int			ft_verif_name(int ac, char **av);
 int			ft_parse_elem(int fd, t_elem *elem);
 int			do_event(int keycode, t_game *game);
+int			exit_game(t_game *game, char *error, int var);
 
 char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
 void		move_up(t_game *game);
 void		ft_color(t_elem *elem);
+void		ft_perror(char *error);
 void		move_down(t_game *game);
 void		move_left(t_game *game);
 void		ft_free_tab(char **tab);
 void		move_right(t_game *game);
 void		init_window(t_game *game);
+void		ft_create_img(t_game *game);
+void		ft_ver_img(int i, t_game *game);
 void		destroy_mlx(void *mlx, void *ptr, int mode);
-void		ft_perror(char *str, int fd, char *line, t_map *map);
 void		mlx_put_pixel(t_game *game, int x, int y, int color);
 void		display_player(t_game *game, int x, int y, int color);
 void		display_square(t_game *game, int x, int y, int color);
@@ -96,7 +111,8 @@ void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
 void		draw_rectangle(t_game *game, t_pos pos, t_pos dims, int color);
 
 void		*ft_free_map(t_map *map);
-void		*ft_free_game(t_game *game);
+void		ft_free_game_2(t_game *game);
+void		*ft_free_game(t_game *game, int var);
 
 t_img		*init_img(void);
 

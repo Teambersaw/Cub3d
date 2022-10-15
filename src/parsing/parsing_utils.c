@@ -24,7 +24,7 @@ char	*ft_strdup_2(char *src, char c)
 
 int	ft_atoi_3(const char *nptr, int nb, int minus)
 {
-	if (*nptr < '0' && *nptr > '9')
+	if (*nptr < '0' || *nptr > '9')
 		return (-1);
 	while (*nptr >= '0' && *nptr <= '9')
 	{
@@ -77,9 +77,6 @@ int	ft_asign_rgb(t_elem *elem)
 
 int	ft_verif_elem(t_elem *elem)
 {
-	int	i;
-
-	i = 0;
 	if (!elem->no || !elem->so || !elem->ea || !elem->we || !elem->c
 		|| !elem->f)
 		return (1);
@@ -87,11 +84,7 @@ int	ft_verif_elem(t_elem *elem)
 		|| elem->f[0] == NULL || elem->f[1] == NULL
 		|| elem->f[1] == NULL || elem->f[2] == NULL)
 		return (1);
-	while (elem->c[i] && elem->f[i])
-	{
-		if (ft_asign_rgb(elem))
-			return (1);
-		i++;
-	}
+	if (ft_asign_rgb(elem))
+		return (1);
 	return (0);
 }

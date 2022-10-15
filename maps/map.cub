@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_north_texture
-WE ./path_to_the_north_texture
-EA ./path_to_the_north_texture
+NO assets/nord.xpm
+SO assets/sud.xpm
+WE assets/ouest.xpm
+EA assets/est.xpm
 
 F 220,100,0
 C 225,30,0

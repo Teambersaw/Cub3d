@@ -35,6 +35,11 @@ t_map	*ft_init_map(void)
 	map->map = NULL;
 	map->nb_player = 0;
 	map->elem = ft_init_elem();
+	if (!map->elem)
+	{
+		free(map);
+		return (NULL);
+	}
 	return (map);
 }
 
@@ -56,7 +61,7 @@ t_pos	*init_pos(void)
 
 	pos = malloc(sizeof(t_pos) * 1);
 	if (!pos)
-		return (NULL);
+		return (free(pos), NULL);
 	pos->x = 0;
 	pos->y = 0;
 	return (pos);
@@ -72,5 +77,7 @@ t_player	*init_player(void)
 	player->speed = 0.1f;
 	player->player = 0;
 	player->pos = init_pos();
+	if (!player->pos)
+		return (free(player), NULL);
 	return (player);
 }

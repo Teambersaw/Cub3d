@@ -18,13 +18,22 @@ void	mlx_put_pixel(t_game *game, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = game->img->addr + (y * game->img->len + x * (game->img->bpp / 8));
+	dst = game->img[0]->addr
+		+ (y * game->img[0]->len + x * (game->img[0]->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
-int	exit_game(t_game *game)
+int	exit_game_v(t_game *game)
 {
-	ft_free_game(game);
+	ft_free_game(game, -1);
 	exit(EXIT_SUCCESS);
+	return (1);
+}
+
+int	exit_game(t_game *game, char *error, int var)
+{
+	ft_free_game(game, var);
+	if (error)
+		ft_perror(error);
 	return (1);
 }

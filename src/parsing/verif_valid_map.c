@@ -1,5 +1,15 @@
 #include "cub3d.h"
 
+void	ft_ver_img(int i, t_game *game)
+{
+	while (++i < 5)
+	{
+		game->img[i] = init_img();
+		if (!game->img[i])
+			exit_game(game, ERR_MALLOC, i);
+	}
+}
+
 int	ft_exist_tab(t_map *map, size_t x, size_t y)
 {
 	if ((ft_strlen(map->map[x - 1]) - 1) < y

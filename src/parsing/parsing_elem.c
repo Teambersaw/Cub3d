@@ -31,17 +31,11 @@ char	**ft_stor_tab(char *line, char **tab)
 	i = 0;
 	if (!line || line[i] != ' ')
 		return (NULL);
-	while (line && line[i] == ' ')
-		i++;
-	tab = ft_split(line + i, ',');
+	tab = ft_split(line, ',');
 	if (!tab)
 		return (NULL);
-	i = 0;
-	while (tab[i])
-		i++;
-	if (i != 3)
+	if (tablen(tab) != 3)
 		return (ft_free_tab(tab), NULL);
-	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (line[i] == '\0')

@@ -18,7 +18,7 @@ void	move_up(t_game *game)
 	display_player(game, game->player->pos->x * game->size,
 		game->player->pos->y * game->size, 0x0000ff);
 	draw_rectangle(game, pos, dims, 0x00ff00);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[1]->img, 0, 0);
 }
 
 void	move_down(t_game *game)
@@ -39,7 +39,7 @@ void	move_down(t_game *game)
 	display_player(game, game->player->pos->x * game->size,
 		game->player->pos->y * game->size, 0x0000ff);
 	draw_rectangle(game, pos, dims, 0x00ff00);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[3]->img, 0, 0);
 }
 
 // In future change this to rotate
@@ -53,14 +53,15 @@ void	move_left(t_game *game)
 	if (game->map->map[(int)(pos.y)][(int)(pos.x - game->player->speed)] == 'm')
 		return ;
 	game->player->pos->x -= game->player->speed;
-	dims.x = (int)((pos.x * game->size) - (game->player->pos->x * game->size) + 1);
+	dims.x = (int)((pos.x * game->size)
+			- (game->player->pos->x * game->size) + 1);
 	dims.y = 20;
 	pos.x = (int)(game->player->pos->x * game->size) + 20;
 	pos.y *= game->size;
 	display_player(game, game->player->pos->x * game->size,
 		game->player->pos->y * game->size, 0x0000ff);
 	draw_rectangle(game, pos, dims, 0x00ff00);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[4]->img, 0, 0);
 }
 
 // In future change this to rotate
@@ -75,12 +76,13 @@ void	move_right(t_game *game)
 		== 'm')
 		return ;
 	game->player->pos->x += game->player->speed;
-	dims.x = (int)((game->player->pos->x * game->size) - (pos.x * game->size) + 1);
+	dims.x = (int)((game->player->pos->x * game->size)
+			- (pos.x * game->size) + 1);
 	dims.y = 20;
 	pos.x = (int)(game->player->pos->x * game->size - dims.x);
 	pos.y *= game->size;
 	display_player(game, game->player->pos->x * game->size,
 		game->player->pos->y * game->size, 0x0000ff);
 	draw_rectangle(game, pos, dims, 0x00ff00);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[2]->img, 0, 0);
 }

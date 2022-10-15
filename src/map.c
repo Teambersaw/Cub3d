@@ -60,22 +60,16 @@ void	display_map(t_game *game)
 			display_square(game, j * game->size, i * game->size, color);
 		}
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[0]->img, 0, 0);
 }
 
 void	init_window(t_game *game)
 {
-	int		width;
-	int		height;
-
-	width = ft_strlen(game->map->map[0]);
-	height = tablen(game->map->map);
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, width * game->size,
-			height * game->size, "Cub3D");
-	game->img->img = mlx_new_image(game->mlx, width * game->size,
-			height * game->size);
-	game->img->addr = mlx_get_data_addr(game->img->img, &game->img->bpp,
-			&game->img->len, &game->img->endian);
-	display_map(game);
+	if (!game->mlx)
+		exit_game(game, ERR_MLX, -1);
+	ft_create_img(game);
+	game->mlx_win = mlx_new_window(game->mlx, 600, 600, "Cub3D");
+	if (!game->mlx_win)
+		exit_game(game, ERR_WIN, -1);
 }
