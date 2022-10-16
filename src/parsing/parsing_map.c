@@ -87,7 +87,7 @@ char	**ft_parse_map(int fd, t_map *map, t_player *player)
 		return (NULL);
 	new_join = ft_verif_join(join, map, player);
 	if (!new_join)
-		return (free(join), NULL);
+		return (NULL);
 	if (new_join[ft_strlen(new_join) - 1] == '\n' || ft_double_nl(new_join))
 		return (free(new_join), NULL);
 	tab = ft_split(new_join, '\n');
