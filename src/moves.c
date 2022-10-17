@@ -7,10 +7,12 @@ void	move_up(t_game *game)
 
 	pos.x = game->player->pos->x;
 	pos.y = game->player->pos->y;
-	if (game->map->map[(int)((pos.y - game->player->speed) / game->size)]
-		[(int)(pos.x / game->size)] == 'm')
+	if (game->ray.length <= 1)
 		return ;
-	game->player->pos->y -= game->player->speed;
+	else if (game->ray.length < game->player->speed)
+		game->player->pos->y -= game->ray.length - 1;
+	else
+		game->player->pos->y -= game->player->speed;
 	dims.x = 20;
 	dims.y = (int)(pos.y - game->player->pos->y);
 	pos.y = (int)(game->player->pos->y) + 20;
@@ -45,6 +47,7 @@ void	move_left(t_game *game)
 	t_pos	pos;
 	t_pos	dims;
 
+	clear_ray(game);
 	pos.x = game->player->pos->x;
 	pos.y = game->player->pos->y;
 	if (game->map->map[(int)(pos.y / game->size)]
@@ -65,6 +68,7 @@ void	move_right(t_game *game)
 	t_pos	pos;
 	t_pos	dims;
 
+	clear_ray(game);
 	pos.x = game->player->pos->x;
 	pos.y = game->player->pos->y;
 	if (game->map->map[(int)(pos.y / game->size)]

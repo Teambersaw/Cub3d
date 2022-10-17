@@ -105,6 +105,7 @@ void		move_up(t_game *game);
 void		draw_ray(t_game *game);
 void		ft_color(t_elem *elem);
 void		ft_perror(char *error);
+void		clear_ray(t_game *game);
 void		move_down(t_game *game);
 void		move_left(t_game *game);
 void		ft_free_tab(char **tab);
