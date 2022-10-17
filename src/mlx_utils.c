@@ -25,6 +25,7 @@ void	mlx_put_pixel(t_game *game, int x, int y, int color)
 
 int	exit_game_v(t_game *game)
 {
+	close(game->fd);
 	ft_free_game(game, -1);
 	exit(EXIT_SUCCESS);
 	return (1);
@@ -32,6 +33,7 @@ int	exit_game_v(t_game *game)
 
 int	exit_game(t_game *game, char *error, int var)
 {
+	close(game->fd);
 	ft_free_game(game, var);
 	if (error)
 		ft_perror(error);

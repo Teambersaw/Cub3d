@@ -37,13 +37,13 @@ typedef struct s_elem
 	char	*ea;
 	char	**f;
 	char	**c;
-	int		nb_elem;
 	int		fr;
 	int		fg;
 	int		fb;
 	int		cr;
 	int		cg;
 	int		cb;
+	int		nb_elem;
 	int		fcolor;
 	int		ccolor;
 }	t_elem;
@@ -80,6 +80,7 @@ typedef struct s_ray
 
 typedef struct s_game
 {
+	int			fd;
 	int			size;
 	void		*mlx;
 	void		*mlx_win;
