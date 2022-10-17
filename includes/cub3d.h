@@ -94,6 +94,7 @@ int			ft_mid_map(t_game *game);
 int			exit_game_v(t_game *game);
 int			ft_atoi_2(const char *nptr);
 int			ft_verif_elem(t_elem *elem);
+int			get_func(t_pos p1, t_pos p2);
 int			ft_verif_name(int ac, char **av);
 int			ft_parse_elem(int fd, t_elem *elem);
 int			do_event(int keycode, t_game *game);
@@ -118,6 +119,7 @@ void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		mlx_put_pixel(t_game *game, int x, int y, int color);
 void		display_player(t_game *game, int x, int y, int color);
 void		display_square(t_game *game, int x, int y, int color);
+void		draw_line(t_game *game, t_pos p1, t_pos p2, int color);
 void		exit_msg(t_map *map, t_game *game, int exit_code, char *msg);
 void		draw_rectangle(t_game *game, t_pos pos, t_pos dims, int color);
 
