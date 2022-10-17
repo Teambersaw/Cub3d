@@ -66,7 +66,7 @@ int	ft_verif_map(t_game *game)
 	return (0);
 }
 
-t_game	*init_game(void)
+t_game	*init_game(int fd)
 {
 	int		i;
 	t_game	*game;
@@ -74,7 +74,11 @@ t_game	*init_game(void)
 	i = -1;
 	game = malloc(sizeof(t_game) * 1);
 	if (!game)
+	{
+		close(fd);
 		exit_game(game, ERR_MALLOC, -1);
+	}
+	game->fd = fd;
 	game->size = 128;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
@@ -97,14 +101,10 @@ t_game	*ft_parsing(int ac, char **av)
 	t_game	*game;
 
 	fd = ft_verif_name(ac, av);
-	game = init_game();
+	game = init_game(fd);
 	if (ft_parse_elem(fd, game->map->elem) || ft_verif_elem(game->map->elem))
-	{
-		close(fd);
 		exit_game(game, ERR_ELEM, -1);
-	}
 	game->map->map = ft_parse_map(fd, game->map, game->player);
-	close(fd);
 	if (!game->map->map)
 		exit_game(game, ERR_MAP, -1);
 	if (ft_verif_map(game))
