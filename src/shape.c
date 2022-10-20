@@ -18,15 +18,22 @@ void	draw_rectangle(t_game *game, t_pos pos, t_pos dims, int color)
 	}
 }
 
+//pixels == game->ray.length;
 void	draw_line(t_game *game, t_pos p1, t_pos p2, int color)
 {
-	t_pos	tmp;
+	int		pixels;
+	t_pos	delta;
 
-	tmp.y = p1.y;
-	tmp.x = p1.x;
-	while (tmp.y != p2.y)
+	delta.x = p2.x - p1.x;
+	delta.y = p2.y - p1.y;
+	pixels = sqrt((delta.x * delta.x) + (delta.y * delta.y));
+	delta.x /= pixels;
+	delta.y /= pixels;
+	while (pixels)
 	{
-		mlx_put_pixel(game, tmp.x++, tmp.y, color);
-		tmp.y += get_func(tmp, p2);
+		mlx_put_pixel(game, p1.x, p1.y, color);
+		p1.x += delta.x;
+		p1.y += delta.y;
+		pixels--;
 	}
 }
