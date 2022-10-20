@@ -33,7 +33,8 @@ int	exit_game_v(t_game *game)
 
 int	exit_game(t_game *game, char *error, int var)
 {
-	close(game->fd);
+	if (game)
+		close(game->fd);
 	ft_free_game(game, var);
 	if (error)
 		ft_perror(error);
