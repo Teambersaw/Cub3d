@@ -79,9 +79,9 @@ t_game	*init_game(int fd)
 		exit_game(game, ERR_MALLOC, -1);
 	}
 	game->fd = fd;
-	game->size = 128;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
+	game->ray = NULL;
 	game->map = ft_init_map();
 	game->img = malloc(sizeof(t_img) * 5);
 	if (!game->img)
