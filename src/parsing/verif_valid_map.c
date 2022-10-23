@@ -70,8 +70,8 @@ int	ft_mid_map(t_game *game)
 				return (1);
 			if (game->map->map[x][y] == game->player->player)
 			{
-				game->player->pos->x = y * game->size;
-				game->player->pos->y = x * game->size;
+				game->player->pos.x = y;
+				game->player->pos.y = x;
 			}
 			y++;
 		}

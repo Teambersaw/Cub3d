@@ -110,5 +110,7 @@ t_game	*ft_parsing(int ac, char **av)
 	if (ft_verif_map(game))
 		exit_game(game, ERR_MAP, -1);
 	ft_color(game->map->elem);
+	game->plane.x = 0;
+	game->plane.y = 0.66f;
 	return (game);
 }

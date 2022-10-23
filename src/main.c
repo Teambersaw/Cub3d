@@ -2,7 +2,6 @@
 
 void	ft_free_game_2(t_game *game)
 {
-	free(game->player->pos);
 	free(game->player);
 	game->player = NULL;
 	destroy_mlx(game->mlx, game->mlx_win, 0);

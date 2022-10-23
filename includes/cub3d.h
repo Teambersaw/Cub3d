@@ -61,7 +61,8 @@ typedef struct s_player
 {
 	char		player;
 	float		speed;
-	t_pos		*pos;
+	t_pos		dir;
+	t_pos		pos;
 }	t_player;
 
 typedef struct s_map
@@ -87,6 +88,7 @@ typedef struct s_game
 	t_map		*map;
 	t_img		**img;
 	t_ray		ray;
+	t_pos		plane;
 	t_player	*player;
 }	t_game;
 
