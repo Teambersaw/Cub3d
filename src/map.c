@@ -8,18 +8,22 @@ int	ft_color2(int r, int g, int b)
 void	ft_print_img(int start, int end, int camera, t_game *game)
 {
 	int	i;
+	int	color;
 
-	i = 0;
-	while (i < H)
+	i = -1;
+	while (++i < H)
 	{
 		if (i < start && i < end)
 			mlx_put_pixel(game, camera, i, game->map->elem->ccolor);
 		else if (i > start && i > end)
 			mlx_put_pixel(game, camera, i, game->map->elem->fcolor);
 		else
-			mlx_put_pixel(game, camera, i, ft_color2(game->img[1]->addr[0],
-					game->img[1]->addr[1], game->img[1]->addr[2]));
-		i++;
+		{
+			game->img[1]->pos.y = (int)game->img[1]->tex_pos & 127;
+			game->img[1]->tex_pos += game->img[1]->step;
+			color = ft_color2(game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x)], game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x) + 1], game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x) + 2]);
+			mlx_put_pixel(game, camera, i, color);
+		}
 	}
 }
 
@@ -66,21 +70,22 @@ t_ray	*init_ray(t_game *game)
 void	cub3d(t_game *game)
 {
 	int		i;
+	int		hit;
+	int		side;
+	int		stepx;
+	int		stepy;
+	int		drawend;
+	int		drawstart;
+	int		lineheight;
 	double	wallx;
-	double camerax;
-	double raydirx;
-	double raydiry;
-	double sidedistx;
-	double sidedisty;
-	double deltadistx;
-	double deltadisty;
-	double perpwalldist;
-	int	stepx;
-	int	stepy;
-	int	texX;
-	int	hit;
-	int side;
-	int lineheight;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
 
 	i = -1;
 	while (++i < L)
@@ -131,7 +136,7 @@ void	cub3d(t_game *game)
 			if (game->map->map[game->ray->mapy][game->ray->mapx] == '1' || game->map->map[game->ray->mapy][game->ray->mapx] == 'm')
 				hit = 1;
 		}
-		if(side == 0)
+		if (!side)
 		{
 			perpwalldist = (sidedistx - deltadistx);
 			wallx = game->player->pos->y + perpwalldist * raydiry;
@@ -142,20 +147,18 @@ void	cub3d(t_game *game)
 			wallx = game->player->pos->x + perpwalldist * raydirx;
 		}
 		wallx -= floor(wallx);
-		texX = (int)(wallx * (double)128);
-		if(side == 0 && raydirx > 0)
-			texX = 128 - texX - 1;
-		if(side == 1 && raydiry < 0)
-			texX = 128 - texX - 1;
+		game->img[1]->pos.x = (int)(wallx * (double)128);
+		if ((!side && raydirx > 0) || (side == 1 && raydiry < 0))
+			game->img[1]->pos.x = 128 - game->img[1]->pos.x - 1;
 		lineheight = (int)(H / perpwalldist);
-		int drawstart = -lineheight / 2 + H / 2;
+		drawstart = -lineheight / 2 + H / 2;
 		if (drawstart < 0)
 			drawstart = 0;
-		int drawend = lineheight / 2 + H / 2;
+		drawend = lineheight / 2 + H / 2;
 		if (drawend >= H)
 			drawend = H;
-		// if (i == L / 2)
-		// 	printf("posx: %f, posy: %f, start: %d, end: %d, perp: %f, delatx: %f, deltay: %f, mapx: %d, mapy: %d\n", game->player->pos->x, game->player->pos->y, drawstart, drawend, perpwalldist, deltadistx, sidedistx, game->ray->mapx, game->ray->mapy);
+		game->img[1]->step = 1.0 * 128 / lineheight;
+		game->img[1]->tex_pos = (drawstart - H / 2 + lineheight / 2) * game->img[1]->step;
 		ft_print_img(drawstart, drawend, i, game);
 	}
 }

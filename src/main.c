@@ -1,20 +1,5 @@
 #include "cub3d.h"
 
-void	print_map(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map->map[++i])
-	{
-		j = -1;
-		while (map->map[i][++j])
-			printf("%c", map->map[i][j]);
-		printf("\n");
-	}
-}
-
 void	ft_free_game_2(t_game *game)
 {
 	free(game->player->pos);
@@ -49,12 +34,11 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = ft_parsing(ac, av);
-	print_map(game->map);
 	init_window(game);
 	cub3d(game);
 	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
 	mlx_hook(game->mlx_win, 3, (1 << 1), stop_event, game);
-	mlx_hook(game->mlx_win, 17, (1 << 0), exit_game_v, game);
+	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
 	mlx_loop_hook(game->mlx, ft_game, game);
 	mlx_loop(game->mlx);
 	return (0);

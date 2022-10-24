@@ -57,8 +57,11 @@ typedef struct s_img
 	int		len;
 	int		bpp;
 	int		endian;
-	void	*img;
 	char	*addr;
+	void	*img;
+	t_pos	pos;
+	double	step;
+	double	tex_pos;
 }	t_img;
 
 typedef struct s_player
