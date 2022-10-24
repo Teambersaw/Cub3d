@@ -14,16 +14,18 @@ void	ft_print_img(int start, int end, int camera, t_game *game)
 	while (++i < H)
 	{
 		if (i < start && i < end)
-			mlx_put_pixel(game, camera, i, game->map->elem->ccolor);
+			color = game->map->elem->ccolor;
 		else if (i > start && i > end)
-			mlx_put_pixel(game, camera, i, game->map->elem->fcolor);
+			color = game->map->elem->fcolor;
 		else
 		{
 			game->img[1]->pos.y = (int)game->img[1]->tex_pos & 127;
 			game->img[1]->tex_pos += game->img[1]->step;
-			color = ft_color2(game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x)], game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x) + 1], game->img[1]->addr[(int)(128 * game->img[1]->pos.y + game->img[1]->pos.x) + 2]);
-			mlx_put_pixel(game, camera, i, color);
+			color = *(unsigned int *)(game->img[1]->addr
+					+ ((int)game->img[1]->pos.y * game->img[1]->len
+						+ (int)game->img[1]->pos.x * (game->img[1]->bpp / 8)));
 		}
+		mlx_put_pixel(game, camera, i, color);
 	}
 }
 
