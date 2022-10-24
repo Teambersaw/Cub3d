@@ -21,7 +21,7 @@ void	ft_create_img(t_game *game)
 	int	var;
 
 	var = 128;
-	game->img[0]->img = mlx_new_image(game->mlx, 768, 640);
+	game->img[0]->img = mlx_new_image(game->mlx, L, H);
 	if (!game->img[0]->img)
 		exit_game(game, ERR_IMG, -1);
 	game->img[0]->addr = mlx_get_data_addr(game->img[0]->img,

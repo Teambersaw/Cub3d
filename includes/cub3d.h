@@ -11,6 +11,10 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
+# define H 800
+# define L 1200
+# define rotSpeed 0.01
+# define moveSpeed 0.01
 # define ERR_DIR "This is a directory."
 # define ERR_MAP "Invalid map in the file."
 # define ERR_FILE "This is not a valid file."
@@ -25,8 +29,8 @@
 
 typedef struct s_pos
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_pos;
 
 typedef struct s_elem
@@ -61,8 +65,7 @@ typedef struct s_player
 {
 	char		player;
 	float		speed;
-	t_pos		dir;
-	t_pos		pos;
+	t_pos		*pos;
 }	t_player;
 
 typedef struct s_map
@@ -74,21 +77,26 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	int		angle;
-	int		length;
-	t_pos	pos;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	int		mapx;
+	int		mapy;
 }	t_ray;
 
 typedef struct s_game
 {
 	int			fd;
-	int			size;
+	int			forward;
+	int			backward;
+	int			right;
+	int			left;
 	void		*mlx;
 	void		*mlx_win;
 	t_map		*map;
 	t_img		**img;
-	t_ray		ray;
-	t_pos		plane;
+	t_ray		*ray;
 	t_player	*player;
 }	t_game;
 
@@ -100,11 +108,13 @@ int			get_func(t_pos p1, t_pos p2);
 int			ft_verif_name(int ac, char **av);
 int			ft_parse_elem(int fd, t_elem *elem);
 int			do_event(int keycode, t_game *game);
+int			stop_event(int keycode, t_game *game);
 int			exit_game(t_game *game, char *error, int var);
 
 char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
+void		cub3d(t_game *game);
 void		move_up(t_game *game);
 void		draw_ray(t_game *game);
 void		ft_color(t_elem *elem);
