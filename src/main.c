@@ -52,7 +52,7 @@ void	print_elem(t_elem *elem)
 void	ft_game(t_game *game)
 {
 	if (game->forward == 1)
- 		move_up(game);
+		move_up(game);
 	if (game->backward == 1)
 		move_down(game);
 	if (game->left == 1)

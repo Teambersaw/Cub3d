@@ -11,8 +11,9 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-# define H 600
-# define L 800
+# define FOV 90 
+# define H 800
+# define L 1200
 # define rotSpeed 0.01
 # define moveSpeed 0.01
 # define ERR_DIR "This is a directory."
@@ -77,12 +78,12 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	int		mapX;
-	int		mapY;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	int		mapx;
+	int		mapy;
 }	t_ray;
 
 typedef struct s_game

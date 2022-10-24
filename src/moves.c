@@ -2,46 +2,46 @@
 
 void	move_up(t_game *game)
 {
-	if (game->map->map[(int)(game->player->pos->y + game->ray->dirY * moveSpeed)][(int)(game->player->pos->x)] != 'm')
-		game->player->pos->x += game->ray->dirX * moveSpeed;
-	if (game->map->map[(int)(game->player->pos->y)][(int)(game->player->pos->x + game->ray->dirX * moveSpeed)] != 'm')
-		game->player->pos->y += game->ray->dirY * moveSpeed;
+	if (game->map->map[(int)(game->player->pos->y + game->ray->diry * moveSpeed)][(int)(game->player->pos->x)] != 'm')
+		game->player->pos->x += game->ray->dirx * moveSpeed;
+	if (game->map->map[(int)(game->player->pos->y)][(int)(game->player->pos->x + game->ray->dirx * moveSpeed)] != 'm')
+		game->player->pos->y += game->ray->diry * moveSpeed;
 	cub3d(game);
 }
 
 void	move_down(t_game *game)
 {
-	if (game->map->map[(int)(game->player->pos->y - game->ray->dirY * moveSpeed)][(int)(game->player->pos->x)] != 'm')
-		game->player->pos->x -= game->ray->dirX * moveSpeed;
-	if (game->map->map[(int)(game->player->pos->y)][(int)(game->player->pos->x - game->ray->dirX * moveSpeed)] != 'm')
-		game->player->pos->y -= game->ray->dirY * moveSpeed;
+	if (game->map->map[(int)(game->player->pos->y - game->ray->diry * moveSpeed)][(int)(game->player->pos->x)] != 'm')
+		game->player->pos->x -= game->ray->dirx * moveSpeed;
+	if (game->map->map[(int)(game->player->pos->y)][(int)(game->player->pos->x - game->ray->dirx * moveSpeed)] != 'm')
+		game->player->pos->y -= game->ray->diry * moveSpeed;
 	cub3d(game);
 }
 
 void	move_right(t_game *game)
 {
-	double oldDirX;
-	double oldPlaneX;
+	double	olddirx;
+	double	oldplanex;
 
-	oldDirX = game->ray->dirX;
-	game->ray->dirX = game->ray->dirX * cos(-rotSpeed) - game->ray->dirY * sin(-rotSpeed);
-	game->ray->dirY = oldDirX * sin(-rotSpeed) + game->ray->dirY * cos(-rotSpeed);
-	oldPlaneX = game->ray->planeX;
-	game->ray->planeX = game->ray->planeX * cos(-rotSpeed) - game->ray->planeY * sin(-rotSpeed);
-	game->ray->planeY = oldPlaneX * sin(-rotSpeed) + game->ray->planeY * cos(-rotSpeed);
+	olddirx = game->ray->dirx;
+	game->ray->dirx = game->ray->dirx * cos(rotSpeed) - game->ray->diry * sin(rotSpeed);
+	game->ray->diry = olddirx * sin(rotSpeed) + game->ray->diry * cos(rotSpeed);
+	oldplanex = game->ray->planex;
+	game->ray->planex = game->ray->planex * cos(rotSpeed) - game->ray->planey * sin(rotSpeed);
+	game->ray->planey = oldplanex * sin(rotSpeed) + game->ray->planey * cos(rotSpeed);
 	cub3d(game);
 }
 
 void	move_left(t_game *game)
 {
-	double oldDirX;
-	double oldPlaneX;
+	double	olddirx;
+	double	oldplanex;
 
-	oldDirX = game->ray->dirX;
-	game->ray->dirX = game->ray->dirX * cos(rotSpeed) - game->ray->dirY * sin(rotSpeed);
-	game->ray->dirY = oldDirX * sin(rotSpeed) + game->ray->dirY * cos(rotSpeed);
-	oldPlaneX = game->ray->planeX;
-	game->ray->planeX = game->ray->planeX * cos(rotSpeed) - game->ray->planeY * sin(rotSpeed);
-	game->ray->planeY = oldPlaneX * sin(rotSpeed) + game->ray->planeY * cos(rotSpeed);
+	olddirx = game->ray->dirx;
+	game->ray->dirx = game->ray->dirx * cos(-rotSpeed) - game->ray->diry * sin(-rotSpeed);
+	game->ray->diry = olddirx * sin(-rotSpeed) + game->ray->diry * cos(-rotSpeed);
+	oldplanex = game->ray->planex;
+	game->ray->planex = game->ray->planex * cos(-rotSpeed) - game->ray->planey * sin(-rotSpeed);
+	game->ray->planey = oldplanex * sin(-rotSpeed) + game->ray->planey * cos(-rotSpeed);
 	cub3d(game);
 }
