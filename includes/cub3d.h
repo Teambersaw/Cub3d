@@ -13,8 +13,8 @@
 
 # define H 800
 # define L 1200
-# define rotSpeed 0.01
-# define moveSpeed 0.01
+# define ROT_SPEED 0.02
+# define MOVE_SPEED 0.02
 # define ERR_DIR "This is a directory."
 # define ERR_MAP "Invalid map in the file."
 # define ERR_FILE "This is not a valid file."
@@ -115,16 +115,16 @@ char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
 void		cub3d(t_game *game);
-void		move_up(t_game *game);
 void		draw_ray(t_game *game);
 void		ft_color(t_elem *elem);
 void		ft_perror(char *error);
 void		clear_ray(t_game *game);
-void		move_down(t_game *game);
-void		move_left(t_game *game);
 void		ft_free_tab(char **tab);
-void		move_right(t_game *game);
+void		turn_left(t_game *game);
+void		turn_right(t_game *game);
 void		init_window(t_game *game);
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
 void		ft_create_img(t_game *game);
 void		ft_ver_img(int i, t_game *game);
 void		destroy_mlx(void *mlx, void *ptr, int mode);

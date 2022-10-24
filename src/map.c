@@ -1,12 +1,11 @@
 #include "cub3d.h"
 
-int ft_color2(int r, int g, int b)
+int	ft_color2(int r, int g, int b)
 {
-   return (r << 16) + (g << 8) + b;
+	return ((r << 16) + (g << 8) + b);
 }
 
-
-void ft_print_img(int start, int end, int camera, t_game *game, double texpos, double step)
+void	ft_print_img(int start, int end, int camera, t_game *game)
 {
 	int	i;
 
@@ -18,12 +17,13 @@ void ft_print_img(int start, int end, int camera, t_game *game, double texpos, d
 		else if (i > start && i > end)
 			mlx_put_pixel(game, camera, i, game->map->elem->fcolor);
 		else
-			mlx_put_pixel(game, camera, i, ft_color2(game->img[1]->addr[0], game->img[1]->addr[1], game->img[1]->addr[2]));
+			mlx_put_pixel(game, camera, i, ft_color2(game->img[1]->addr[0],
+					game->img[1]->addr[1], game->img[1]->addr[2]));
 		i++;
 	}
 }
 
-void init_ray2(t_ray *ray, t_game *game)
+void	init_ray2(t_ray *ray, t_game *game)
 {
 	if (game->player->player == 'S')
 	{
@@ -75,8 +75,6 @@ void	cub3d(t_game *game)
 	double deltadistx;
 	double deltadisty;
 	double perpwalldist;
-	double texpos;
-	double step;
 	int	stepx;
 	int	stepy;
 	int	texX;
@@ -89,7 +87,7 @@ void	cub3d(t_game *game)
 	{
 		game->ray->mapx = (int)game->player->pos->x;
 		game->ray->mapy = (int)game->player->pos->y;
-		camerax =  2.0 * (double)i / (double)L - 1.0;
+		camerax = 2.0 * (double)i / (double)L - 1.0;
 		raydirx = game->ray->dirx + game->ray->planex * camerax;
 		raydiry = game->ray->diry + game->ray->planey * camerax;
 		deltadistx = fabs(1 / raydirx);
@@ -129,6 +127,7 @@ void	cub3d(t_game *game)
 				game->ray->mapy += stepy;
 				side = 1;
 			}
+
 			if (game->map->map[game->ray->mapy][game->ray->mapx] == '1' || game->map->map[game->ray->mapy][game->ray->mapx] == 'm')
 				hit = 1;
 		}
@@ -140,7 +139,7 @@ void	cub3d(t_game *game)
 		else
 		{
 			perpwalldist = (sidedisty - deltadisty);
-			wallx = game->player->pos->x; + perpwalldist * raydirx;
+			wallx = game->player->pos->x + perpwalldist * raydirx;
 		}
 		wallx -= floor(wallx);
 		texX = (int)(wallx * (double)128);
@@ -155,11 +154,9 @@ void	cub3d(t_game *game)
 		int drawend = lineheight / 2 + H / 2;
 		if (drawend >= H)
 			drawend = H;
-		step = 1 * 128 / H;
-		texpos = (drawstart - H / 2 + lineheight / 2) * step;
-		if (i == L / 2)
-			printf("posx: %f, posy: %f, start: %d, end: %d, perp: %f, delatx: %f, deltay: %f, mapx: %d, mapy: %d\n", game->player->pos->x, game->player->pos->y, drawstart, drawend, perpwalldist, deltadistx, sidedistx, game->ray->mapx, game->ray->mapy);
-		ft_print_img(drawstart, drawend, i, game, texpos, step);
+		// if (i == L / 2)
+		// 	printf("posx: %f, posy: %f, start: %d, end: %d, perp: %f, delatx: %f, deltay: %f, mapx: %d, mapy: %d\n", game->player->pos->x, game->player->pos->y, drawstart, drawend, perpwalldist, deltadistx, sidedistx, game->ray->mapx, game->ray->mapy);
+		ft_print_img(drawstart, drawend, i, game);
 	}
 }
 

@@ -1,7 +1,24 @@
 #include "cub3d.h"
 
+void	print_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+			printf("%c", map->map[i][j]);
+		printf("\n");
+	}
+}
+
 void	ft_free_game_2(t_game *game)
 {
+	free(game->player->pos);
+	game->player->pos = NULL;
 	free(game->player);
 	game->player = NULL;
 	destroy_mlx(game->mlx, game->mlx_win, 0);
@@ -13,52 +30,18 @@ void	ft_free_game_2(t_game *game)
 	game = NULL;
 }
 
-//fonction test
-void	print_tabb(char **tab)
-{
-	int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	while (tab[++i])
-		printf("%s\n", tab[i]);
-}
-
-//fonction test
-void	print_tab(char **tab, char *car)
-{
-	int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	while (tab[++i])
-		printf("%s valeur: %s\n", car, tab[i]);
-}
-
-//fonction test
-void	print_elem(t_elem *elem)
-{
-	printf("east valeur: %s\n", elem->ea);
-	printf("north valeur: %s\n", elem->no);
-	printf("south valeur: %s\n", elem->so);
-	printf("west valeur: %s\n", elem->we);
-	print_tab(elem->c, "Plafond");
-	print_tab(elem->f, "sol");
-}
-
-void	ft_game(t_game *game)
+int	ft_game(t_game *game)
 {
 	if (game->forward == 1)
-		move_up(game);
+		move_forward(game);
 	if (game->backward == 1)
-		move_down(game);
+		move_backward(game);
 	if (game->left == 1)
-		move_left(game);
+		turn_left(game);
 	if (game->right == 1)
-		move_right(game);
+		turn_right(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[0]->img, 0, 0);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -66,6 +49,7 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = ft_parsing(ac, av);
+	print_map(game->map);
 	init_window(game);
 	cub3d(game);
 	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
