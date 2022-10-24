@@ -11,7 +11,6 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-# define FOV 90 
 # define H 800
 # define L 1200
 # define rotSpeed 0.01
