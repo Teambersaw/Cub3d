@@ -1,21 +1,19 @@
 #include "cub3d.h"
 
-int	ft_color2(int r, int g, int b)
-{
-	return ((r << 16) + (g << 8) + b);
-}
-
-void	ft_print_img(int start, int end, int camera, t_game *game)
+void	ft_print_img(int camera, t_game *game)
 {
 	int	i;
 	int	color;
 
 	i = -1;
+	game->img[1]->step = 1.0 * 128 / game->renderer->lineheight;
+	game->img[1]->tex_pos = (game->renderer->drawstart - H / 2
+			+ game->renderer->lineheight / 2) * game->img[1]->step;
 	while (++i < H)
 	{
-		if (i < start && i < end)
+		if (i < game->renderer->drawstart && i < game->renderer->drawend)
 			color = game->map->elem->ccolor;
-		else if (i > start && i > end)
+		else if (i > game->renderer->drawstart && i > game->renderer->drawend)
 			color = game->map->elem->fcolor;
 		else
 		{
@@ -72,96 +70,17 @@ t_ray	*init_ray(t_game *game)
 void	cub3d(t_game *game)
 {
 	int		i;
-	int		hit;
-	int		side;
-	int		stepx;
-	int		stepy;
-	int		drawend;
-	int		drawstart;
-	int		lineheight;
-	double	wallx;
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
 
 	i = -1;
 	while (++i < L)
 	{
 		game->ray->mapx = (int)game->player->pos->x;
 		game->ray->mapy = (int)game->player->pos->y;
-		camerax = 2.0 * (double)i / (double)L - 1.0;
-		raydirx = game->ray->dirx + game->ray->planex * camerax;
-		raydiry = game->ray->diry + game->ray->planey * camerax;
-		deltadistx = fabs(1 / raydirx);
-		deltadisty = fabs(1 / raydiry);
-		if (raydirx < 0)
-		{
-			stepx = -1;
-			sidedistx = (game->player->pos->x - game->ray->mapx) * deltadistx;
-		}
-		else
-		{
-			stepx = 1;
-			sidedistx = (game->ray->mapx + 1.0 - game->player->pos->x) * deltadistx;
-		}
-		if (raydiry < 0)
-		{
-			stepy = -1;
-			sidedisty = (game->player->pos->y - game->ray->mapy) * deltadisty;
-		}
-		else
-		{
-			stepy = 1;
-			sidedisty = (game->ray->mapy + 1.0 - game->player->pos->y) * deltadisty;
-		}
-		hit = 0;
-		while (hit == 0)
-		{
-			if (sidedistx < sidedisty)
-			{
-				sidedistx += deltadistx;
-				game->ray->mapx += stepx;
-				side = 0;
-			}
-			else
-			{
-				sidedisty += deltadisty;
-				game->ray->mapy += stepy;
-				side = 1;
-			}
-
-			if (game->map->map[game->ray->mapy][game->ray->mapx] == '1' || game->map->map[game->ray->mapy][game->ray->mapx] == 'm')
-				hit = 1;
-		}
-		if (!side)
-		{
-			perpwalldist = (sidedistx - deltadistx);
-			wallx = game->player->pos->y + perpwalldist * raydiry;
-		}
-		else
-		{
-			perpwalldist = (sidedisty - deltadisty);
-			wallx = game->player->pos->x + perpwalldist * raydirx;
-		}
-		wallx -= floor(wallx);
-		game->img[1]->pos.x = (int)(wallx * (double)128);
-		if ((!side && raydirx > 0) || (side == 1 && raydiry < 0))
-			game->img[1]->pos.x = 128 - game->img[1]->pos.x - 1;
-		lineheight = (int)(H / perpwalldist);
-		drawstart = -lineheight / 2 + H / 2;
-		if (drawstart < 0)
-			drawstart = 0;
-		drawend = lineheight / 2 + H / 2;
-		if (drawend >= H)
-			drawend = H;
-		game->img[1]->step = 1.0 * 128 / lineheight;
-		game->img[1]->tex_pos = (drawstart - H / 2 + lineheight / 2) * game->img[1]->step;
-		ft_print_img(drawstart, drawend, i, game);
+		set_renderer(i, game);
+		launch_ray(game);
+		get_dist(game);
+		get_wall_height(game);
+		ft_print_img(i, game);
 	}
 }
 

@@ -3,10 +3,11 @@
 void	move_forward(t_game *game)
 {
 	if (game->map->map[(int)(game->player->pos->y + game->ray->diry
-			* MOVE_SPEED)][(int)(game->player->pos->x)] != 'm')
+			* (MOVE_SPEED * 10))][(int)(game->player->pos->x)] != 'm')
 		game->player->pos->y += game->ray->diry * MOVE_SPEED;
 	if (game->map->map[(int)(game->player->pos->y)]
-		[(int)(game->player->pos->x + game->ray->dirx * MOVE_SPEED)] != 'm')
+		[(int)(game->player->pos->x + game->ray->dirx
+			* (MOVE_SPEED * 10))] != 'm')
 		game->player->pos->x += game->ray->dirx * MOVE_SPEED;
 	cub3d(game);
 }

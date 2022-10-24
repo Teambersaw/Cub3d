@@ -14,6 +14,11 @@ void	destroy_mlx(void *mlx, void *ptr, int mode)
 	}
 }
 
+int	ft_color2(int r, int g, int b)
+{
+	return ((r << 16) + (g << 8) + b);
+}
+
 void	mlx_put_pixel(t_game *game, int x, int y, int color)
 {
 	char	*dst;

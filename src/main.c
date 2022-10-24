@@ -2,6 +2,8 @@
 
 void	ft_free_game_2(t_game *game)
 {
+	free(game->renderer);
+	game->renderer = NULL;
 	free(game->player->pos);
 	game->player->pos = NULL;
 	free(game->player);

@@ -25,22 +25,19 @@ t_elem	*ft_init_elem(void)
 	return (elem);
 }
 
-t_map	*ft_init_map(void)
+void	ft_init_map(t_game *game)
 {
-	t_map	*map;
-
-	map = malloc(sizeof(t_map) * 1);
-	if (!map)
-		return (NULL);
-	map->map = NULL;
-	map->nb_player = 0;
-	map->elem = ft_init_elem();
-	if (!map->elem)
+	game->map = malloc(sizeof(t_map) * 1);
+	if (!game->map)
+		exit_game(game, ERR_MALLOC, -1);
+	game->map->map = NULL;
+	game->map->nb_player = 0;
+	game->map->elem = ft_init_elem();
+	if (!game->map->elem)
 	{
-		free(map);
-		return (NULL);
+		free(game->map);
+		exit_game(game, ERR_MALLOC, -1);
 	}
-	return (map);
 }
 
 t_img	*init_img(void)
@@ -55,27 +52,21 @@ t_img	*init_img(void)
 	return (img);
 }
 
-t_pos	*init_pos(void)
+void	init_pos(t_game *game)
 {
-	t_pos	*pos;
-
-	pos = malloc(sizeof(t_pos) * 1);
-	if (!pos)
-		return (NULL);
-	pos->x = 0;
-	pos->y = 0;
-	return (pos);
+	game->player->pos = malloc(sizeof(t_pos) * 1);
+	if (!game->player->pos)
+		exit_game(game, ERR_MALLOC, -2);
+	game->player->pos->x = 0;
+	game->player->pos->y = 0;
 }
 
-t_player	*init_player(void)
+void	init_player(t_game *game)
 {
-	t_player	*player;
-
-	player = malloc(sizeof(t_player) * 1);
-	if (!player)
-		return (NULL);
-	player->pos = init_pos();
-	player->speed = 0.1f;
-	player->player = 0;
-	return (player);
+	game->player = malloc(sizeof(t_player) * 1);
+	if (!game->player)
+		exit_game(game, ERR_MALLOC, -2);
+	init_pos(game);
+	game->player->speed = 0.1f;
+	game->player->player = 0;
 }

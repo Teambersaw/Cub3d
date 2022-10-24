@@ -66,6 +66,8 @@ typedef struct s_img
 
 typedef struct s_player
 {
+	int			stepx;
+	int			stepy;
 	char		player;
 	float		speed;
 	t_pos		*pos;
@@ -88,6 +90,23 @@ typedef struct s_ray
 	int		mapy;
 }	t_ray;
 
+typedef struct s_renderer
+{
+	int		side;
+	int		drawend;
+	int		drawstart;
+	int		lineheight;
+	double	wallx;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+}	t_renderer;
+
 typedef struct s_game
 {
 	int			fd;
@@ -101,6 +120,7 @@ typedef struct s_game
 	t_img		**img;
 	t_ray		*ray;
 	t_player	*player;
+	t_renderer	*renderer;
 }	t_game;
 
 int			ft_mid_map(t_game *game);
@@ -108,6 +128,7 @@ int			exit_game_v(t_game *game);
 int			ft_atoi_2(const char *nptr);
 int			ft_verif_elem(t_elem *elem);
 int			get_func(t_pos p1, t_pos p2);
+int			ft_color2(int r, int g, int b);
 int			ft_verif_name(int ac, char **av);
 int			ft_parse_elem(int fd, t_elem *elem);
 int			do_event(int keycode, t_game *game);
@@ -118,6 +139,7 @@ char		*ft_strdup_2(char *src, char c);
 char		**ft_parse_map(int fd, t_map *map, t_player *player);
 
 void		cub3d(t_game *game);
+void		get_dist(t_game *game);
 void		draw_ray(t_game *game);
 void		ft_color(t_elem *elem);
 void		ft_perror(char *error);
@@ -125,11 +147,17 @@ void		clear_ray(t_game *game);
 void		ft_free_tab(char **tab);
 void		turn_left(t_game *game);
 void		turn_right(t_game *game);
+void		launch_ray(t_game *game);
 void		init_window(t_game *game);
+void		init_player(t_game *game);
+void		ft_init_map(t_game *game);
 void		move_forward(t_game *game);
 void		move_backward(t_game *game);
 void		ft_create_img(t_game *game);
+void		init_renderer(t_game *game);
+void		get_wall_height(t_game *game);
 void		ft_ver_img(int i, t_game *game);
+void		set_renderer(int column, t_game *game);
 void		destroy_mlx(void *mlx, void *ptr, int mode);
 void		mlx_put_pixel(t_game *game, int x, int y, int color);
 void		display_player(t_game *game, int x, int y, int color);
@@ -144,10 +172,6 @@ void		*ft_free_game(t_game *game, int var);
 
 t_img		*init_img(void);
 
-t_map		*ft_init_map(void);
-
 t_game		*ft_parsing(int ac, char **av);
-
-t_player	*init_player(void);
 
 #endif

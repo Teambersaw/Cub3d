@@ -82,16 +82,13 @@ t_game	*init_game(int fd)
 	game->mlx = NULL;
 	game->mlx_win = NULL;
 	game->ray = NULL;
-	game->map = ft_init_map();
+	ft_init_map(game);
+	init_renderer(game);
 	game->img = malloc(sizeof(t_img) * 5);
 	if (!game->img)
 		exit_game(game, ERR_MALLOC, -1);
 	ft_ver_img(i, game);
-	game->player = init_player();
-	if (!game->player)
-		exit_game(game, ERR_MALLOC, -2);
-	if (!game->map)
-		exit_game(game, ERR_MALLOC, -1);
+	init_player(game);
 	return (game);
 }
 
