@@ -4,19 +4,19 @@
     F    47   ,   127   ,   77    
 
 
-      NO         assets/nord.xpm
+      NO         assets/tex1.xpm
 
 
 
-             SO               assets/sud.xpm
+             SO               assets/tex3.xpm
 
  C 119,  181  , 254
 
- WE        assets/ouest.xpm
+ WE        assets/tex2.xpm
 
 
 
-EA assets/est.xpm
+EA assets/tex4.xpm
 
          
      
