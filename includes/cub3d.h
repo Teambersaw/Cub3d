@@ -109,8 +109,9 @@ typedef struct s_renderer
 
 typedef struct s_game
 {
-	int			fd;
 	int			s;
+	int			fd;
+	int			size;
 	int			left;
 	int			right;
 	int			t_left;

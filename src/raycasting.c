@@ -84,8 +84,8 @@ void	get_wall_height(t_game *game)
 {
 	game->renderer->wallx -= floor(game->renderer->wallx);
 	game->img[game->s]->pos.x = (int)(game->renderer->wallx * (double)128);
-	if ((!game->renderer->side && game->renderer->raydirx > 0)
-		|| (game->renderer->side == 1 && game->renderer->raydiry < 0))
+	if ((!game->renderer->side && game->renderer->raydirx < 0)
+		|| (game->renderer->side == 1 && game->renderer->raydiry > 0))
 		game->img[game->s]->pos.x = 128 - game->img[game->s]->pos.x - 1;
 	game->renderer->lineheight = (int)(H / game->renderer->perpwalldist);
 	game->renderer->drawstart = -game->renderer->lineheight / 2 + H / 2;
