@@ -13,7 +13,7 @@
 
 # define L 1200
 # define H 800
-# define ROT_SPEED 0.02
+# define ROT_SPEED 0.01
 # define MOVE_SPEED 0.02
 # define ERR_DIR "This is a directory."
 # define ERR_MAP "Invalid map in the file."

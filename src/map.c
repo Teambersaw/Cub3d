@@ -34,7 +34,7 @@ void	init_ray2(t_ray *ray, t_game *game)
 	{
 		ray->dirx = 0.0;
 		ray->diry = 1.0;
-		ray->planex = -1;
+		ray->planex = -0.72;
 		ray->planey = 0.0;
 	}
 	if (game->player->player == 'W')
@@ -42,7 +42,7 @@ void	init_ray2(t_ray *ray, t_game *game)
 		ray->dirx = -1;
 		ray->diry = 0.0;
 		ray->planex = 0.0;
-		ray->planey = -1;
+		ray->planey = -0.72;
 	}
 }
 
@@ -55,14 +55,14 @@ t_ray	*init_ray(t_game *game)
 		return (NULL);
 	ray->dirx = 0.0;
 	ray->diry = -1.0;
-	ray->planex = 1;
+	ray->planex = 0.72;
 	ray->planey = 0.0;
 	if (game->player->player == 'E')
 	{
 		ray->dirx = 1.0;
 		ray->diry = 0.0;
 		ray->planex = 0.0;
-		ray->planey = 1;
+		ray->planey = 0.72;
 	}
 	init_ray2(ray, game);
 	return (ray);
