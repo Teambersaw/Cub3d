@@ -97,8 +97,11 @@ void	init_window(t_game *game)
 	game->ray = init_ray(game);
 	if (!game->ray)
 		exit_game(game, ERR_MALLOC, -1);
+	init_renderer(game);
 	game->backward = 0;
 	game->forward = 0;
 	game->left = 0;
 	game->right = 0;
+	game->t_right = 0;
+	game->t_left = 0;
 }
