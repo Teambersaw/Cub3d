@@ -23,9 +23,11 @@ int	ft_game(t_game *game)
 		move_forward(game);
 	if (game->backward == 1)
 		move_backward(game);
-	if (game->left == 1)
+	if (game->left == 1 || game->right == 1)
+		move_sideward(game);
+	if (game->t_left == 1)
 		turn_left(game);
-	if (game->right == 1)
+	if (game->t_right == 1)
 		turn_right(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[0]->img, 0, 0);
 	return (0);

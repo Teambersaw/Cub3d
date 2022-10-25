@@ -12,6 +12,10 @@ int	do_event(int keycode, t_game *game)
 		game->left = 1;
 	else if (keycode == 'd' || keycode == 'D' || keycode == 65363)
 		game->right = 1;
+	else if (keycode == 'q' || keycode == 'Q')
+		game->t_left = 1;
+	else if (keycode == 'e' || keycode == 'E')
+		game->t_right = 1;
 	return (0);
 }
 
@@ -27,5 +31,9 @@ int	stop_event(int keycode, t_game *game)
 		game->left = 0;
 	else if (keycode == 'd' || keycode == 'D' || keycode == 65363)
 		game->right = 0;
+	else if (keycode == 'q' || keycode == 'Q')
+		game->t_left = 0;
+	else if (keycode == 'e' || keycode == 'E')
+		game->t_right = 0;
 	return (0);
 }
