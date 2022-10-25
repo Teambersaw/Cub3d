@@ -12,6 +12,7 @@ void	ft_free_game_2(t_game *game)
 	destroy_mlx(game->mlx, NULL, 1);
 	free(game->mlx);
 	free(game->ray);
+	game->ray = NULL;
 	game->mlx = NULL;
 	free(game);
 	game = NULL;
@@ -42,7 +43,7 @@ int	main(int ac, char **av)
 	cub3d(game);
 	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
 	mlx_hook(game->mlx_win, 3, (1 << 1), stop_event, game);
-	mlx_hook(game->mlx_win, 2, (1 << 0), do_event, game);
+	mlx_hook(game->mlx_win, 17, (1 << 0), exit_game_v, game);
 	mlx_loop_hook(game->mlx, ft_game, game);
 	mlx_loop(game->mlx);
 	return (0);

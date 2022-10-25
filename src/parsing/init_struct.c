@@ -34,10 +34,7 @@ void	ft_init_map(t_game *game)
 	game->map->nb_player = 0;
 	game->map->elem = ft_init_elem();
 	if (!game->map->elem)
-	{
-		free(game->map);
 		exit_game(game, ERR_MALLOC, -1);
-	}
 }
 
 t_img	*init_img(void)

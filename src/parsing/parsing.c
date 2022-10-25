@@ -78,6 +78,8 @@ t_game	*init_game(int fd)
 		close(fd);
 		exit_game(game, ERR_MALLOC, -1);
 	}
+	game->img = NULL;
+	game->map = NULL;
 	game->fd = fd;
 	game->mlx = NULL;
 	game->mlx_win = NULL;
