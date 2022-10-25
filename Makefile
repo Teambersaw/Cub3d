@@ -1,5 +1,5 @@
 CC=gcc
-NAME=cub3d
+NAME=cub3D
 OBJ_DIR=obj/
 SRC_DIR=src/
 MLX_DIR=minilibx/

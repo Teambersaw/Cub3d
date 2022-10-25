@@ -62,6 +62,10 @@ void	get_dist(t_game *game)
 				- game->renderer->deltadistx);
 		game->renderer->wallx = game->player->pos->y
 			+ game->renderer->perpwalldist * game->renderer->raydiry;
+		if (game->renderer->raydirx > 0)
+			game->s = 4;
+		else
+			game->s = 2;
 	}
 	else
 	{
@@ -69,16 +73,20 @@ void	get_dist(t_game *game)
 				- game->renderer->deltadisty);
 		game->renderer->wallx = game->player->pos->x
 			+ game->renderer->perpwalldist * game->renderer->raydirx;
+		if (game->renderer->raydiry > 0)
+			game->s = 1;
+		else
+			game->s = 3;
 	}
 }
 
 void	get_wall_height(t_game *game)
 {
 	game->renderer->wallx -= floor(game->renderer->wallx);
-	game->img[1]->pos.x = (int)(game->renderer->wallx * (double)128);
+	game->img[game->s]->pos.x = (int)(game->renderer->wallx * (double)128);
 	if ((!game->renderer->side && game->renderer->raydirx > 0)
 		|| (game->renderer->side == 1 && game->renderer->raydiry < 0))
-		game->img[1]->pos.x = 128 - game->img[1]->pos.x - 1;
+		game->img[game->s]->pos.x = 128 - game->img[game->s]->pos.x - 1;
 	game->renderer->lineheight = (int)(H / game->renderer->perpwalldist);
 	game->renderer->drawstart = -game->renderer->lineheight / 2 + H / 2;
 	if (game->renderer->drawstart < 0)

@@ -11,8 +11,8 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
-# define H 800
 # define L 1200
+# define H 800
 # define ROT_SPEED 0.02
 # define MOVE_SPEED 0.02
 # define ERR_DIR "This is a directory."
@@ -110,6 +110,7 @@ typedef struct s_renderer
 typedef struct s_game
 {
 	int			fd;
+	int			s;
 	int			forward;
 	int			backward;
 	int			right;

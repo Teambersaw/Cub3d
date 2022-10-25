@@ -6,9 +6,9 @@ void	ft_print_img(int camera, t_game *game)
 	int	color;
 
 	i = -1;
-	game->img[1]->step = 1.0 * 128 / game->renderer->lineheight;
-	game->img[1]->tex_pos = (game->renderer->drawstart - H / 2
-			+ game->renderer->lineheight / 2) * game->img[1]->step;
+	game->img[game->s]->step = 1.0 * 128 / game->renderer->lineheight;
+	game->img[game->s]->tex_pos = (game->renderer->drawstart - H / 2
+			+ game->renderer->lineheight / 2) * game->img[game->s]->step;
 	while (++i < H)
 	{
 		if (i < game->renderer->drawstart && i < game->renderer->drawend)
@@ -17,11 +17,12 @@ void	ft_print_img(int camera, t_game *game)
 			color = game->map->elem->fcolor;
 		else
 		{
-			game->img[1]->pos.y = (int)game->img[1]->tex_pos & 127;
-			game->img[1]->tex_pos += game->img[1]->step;
-			color = *(unsigned int *)(game->img[1]->addr
-					+ ((int)game->img[1]->pos.y * game->img[1]->len
-						+ (int)game->img[1]->pos.x * (game->img[1]->bpp / 8)));
+			game->img[game->s]->pos.y = (int)game->img[game->s]->tex_pos & 127;
+			game->img[game->s]->tex_pos += game->img[game->s]->step;
+			color = *(unsigned int *)(game->img[game->s]->addr
+					+ ((int)game->img[game->s]->pos.y * game->img[game->s]->len
+						+ (int)game->img[game->s]->pos.x
+						* (game->img[game->s]->bpp / 8)));
 		}
 		mlx_put_pixel(game, camera, i, color);
 	}
@@ -33,15 +34,15 @@ void	init_ray2(t_ray *ray, t_game *game)
 	{
 		ray->dirx = 0.0;
 		ray->diry = 1.0;
-		ray->planex = sin(-1);
+		ray->planex = -1;
 		ray->planey = 0.0;
 	}
 	if (game->player->player == 'W')
 	{
-		ray->dirx = -1.0;
+		ray->dirx = -1;
 		ray->diry = 0.0;
 		ray->planex = 0.0;
-		ray->planey = -cos(1);
+		ray->planey = -1;
 	}
 }
 
@@ -54,14 +55,14 @@ t_ray	*init_ray(t_game *game)
 		return (NULL);
 	ray->dirx = 0.0;
 	ray->diry = -1.0;
-	ray->planex = sin(1);
+	ray->planex = 1;
 	ray->planey = 0.0;
 	if (game->player->player == 'E')
 	{
 		ray->dirx = 1.0;
 		ray->diry = 0.0;
 		ray->planex = 0.0;
-		ray->planey = 1.0 * cos(1);
+		ray->planey = 1;
 	}
 	init_ray2(ray, game);
 	return (ray);
@@ -90,7 +91,7 @@ void	init_window(t_game *game)
 	if (!game->mlx)
 		exit_game(game, ERR_MLX, -1);
 	ft_create_img(game);
-	game->mlx_win = mlx_new_window(game->mlx, L, H, "Cub3D");
+	game->mlx_win = mlx_new_window(game->mlx, L, H, "cub3D");
 	if (!game->mlx_win)
 		exit_game(game, ERR_WIN, -1);
 	game->ray = init_ray(game);
