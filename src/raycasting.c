@@ -2,7 +2,7 @@
 
 void	set_renderer(int column, t_game *game)
 {
-	game->renderer->camerax = 2.0 * (double)column / (double)L - 1.0;
+	game->renderer->camerax = 2 * (double)column / (double)L - 1.0;
 	game->renderer->raydirx = game->ray->dirx + game->ray->planex
 		* game->renderer->camerax;
 	game->renderer->raydiry = game->ray->diry + game->ray->planey
