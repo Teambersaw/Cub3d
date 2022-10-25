@@ -23,10 +23,8 @@ int	ft_game(t_game *game)
 		move_forward(game);
 	if (game->backward == 1)
 		move_backward(game);
-	if (game->left == 1)
-		move_leftward(game);
-	if (game->right == 1)
-		move_rightward(game);
+	if (game->left == 1 || game->right == 1)
+		move_sideward(game);
 	if (game->t_left == 1)
 		turn_left(game);
 	if (game->t_right == 1)

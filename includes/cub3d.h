@@ -154,6 +154,7 @@ void		init_window(t_game *game);
 void		init_player(t_game *game);
 void		ft_init_map(t_game *game);
 void		move_forward(t_game *game);
+void		move_backward(t_game *game);
 void		move_sideward(t_game *game);
 void		ft_create_img(t_game *game);
 void		init_renderer(t_game *game);
