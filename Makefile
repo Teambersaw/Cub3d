@@ -6,7 +6,7 @@ MLX_DIR=minilibx/
 INCLUDES=includes/
 HEADER= $(INCLUDES)cub3d.h $(INCLUDES)libft.h
 MLX_FLAGS=-L./$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
-CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -lXext -lX11 -lm -Lminilibx/ -lmlx_Linux -Ofast -flto
+CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -lXext -lX11 -lm -L minilibx/ -lmlx_Linux -Ofast -flto
 CFILES=$(addprefix $(SRC_DIR), main.c parsing/parsing.c parsing/init_struct.c parsing/parsing_map.c\
 		parsing/name_map.c parsing/parsing_elem.c parsing/parsing_utils.c parsing/verif_valid_map.c\
 		parsing/free_utils.c mlx_utils.c map.c events.c moves.c parsing/init_struct2.c raycasting.c)
@@ -23,12 +23,6 @@ $(NAME): $(HEADER) $(OBJS)
 
 all: $(NAME)
 
-debug: CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g $(MLX_FLAGS) -Ofast -flto
-debug: $(NAME)
-
-debug_sanitize:CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g -fsanitize=address $(MLX_FLAGS) -Ofast -flto
-debug_sanitize: $(NAME)
-
 clean:
 	$(MAKE) clean -C libft/
 	$(MAKE) clean -C $(MLX_DIR)
@@ -38,16 +32,6 @@ fclean: clean
 	rm -rf libft/bin/libft.a
 	rm -rf $(NAME)
 
-sanitize:CFLAGS=-lreadline -Wall -Wextra -Werror -I $(INCLUDES) -fsanitize=address $(MLX_FLAGS) -Ofast -flto
-sanitize: $(NAME)
-
 re: fclean all
 
-re_debug: fclean debug
-
-re_sanitize: fclean sanitize
-
-re_debug_sanitize: fclean debug_sanitize
-
-.PHONY: all debug clean fclean sanitize \
-re re_debug re_sanitize re_debug_sanitize
+.PHONY: all clean fclean re
