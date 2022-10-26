@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 10:46:45 by jrossett          #+#    #+#             */
+/*   Updated: 2022/10/26 10:55:23 by jrossett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -13,8 +25,8 @@
 
 # define L 1200
 # define H 800
-# define ROT_SPEED 0.01
-# define MOVE_SPEED 0.02
+# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.05
 # define ERR_DIR "This is a directory."
 # define ERR_MAP "Invalid map in the file."
 # define ERR_FILE "This is not a valid file."
@@ -25,7 +37,7 @@
 # define ERR_ARGS "The program takes only one argument."
 # define ERR_MALLOC "Failure while allocating the heap."
 # define ERR_ADDR "Failure while creating images address."
-# define ERR_NAME "Invalid name: map shoud be a \"\%.cub\" format."
+# define ERR_NAME "Invalid name: map shoud be a \"*.cub\" format."
 
 typedef struct s_pos
 {
